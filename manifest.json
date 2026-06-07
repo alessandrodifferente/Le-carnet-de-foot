@@ -1,0 +1,25 @@
+{
+  "name": "Le Cahier des Matchs",
+  "short_name": "Cahier Matchs",
+  "description": "Carnet personnel pour noter les matchs de foot regardés.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#06110b",
+  "theme_color": "#06110b",
+  "icons": [
+    {
+      "src": "./assets/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

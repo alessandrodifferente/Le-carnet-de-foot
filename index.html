@@ -1,0 +1,1081 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Le Cahier des Matchs — Option A finale</title>
+<style>
+:root{
+  --bg:#06110b;--panel:#0d1b13;--panel2:#12251a;--card:#102017;--line:#1e3a29;
+  --text:#f4fff8;--muted:#9bb6a6;--green:#00c853;--green2:#8cffb1;--danger:#ff5c5c;
+  --yellow:#ffd166;--blue:#64b5f6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:
+  radial-gradient(circle at 20% -10%,rgba(0,200,83,.22),transparent 34%),
+  linear-gradient(180deg,#07150d,#030805 70%);
+  color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+}
+button,input,select,textarea{font:inherit}
+.app{max-width:460px;margin:0 auto;min-height:100vh;padding:16px 14px 92px}
+.logo-wrap{display:flex;align-items:center;gap:12px}
+.logo{
+  width:58px;height:58px;border-radius:22px;background:linear-gradient(145deg,#013d1b,#00c853);
+  display:grid;place-items:center;box-shadow:0 14px 34px rgba(0,200,83,.25);border:1px solid rgba(255,255,255,.14);
+}
+.logo svg{width:42px;height:42px}.logo img{display:block}
+h1{font-size:22px;margin:0;font-weight:900;letter-spacing:-.4px}
+.subtitle{color:var(--muted);font-size:13px;margin-top:3px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.icon-btn,.mini-btn{border:1px solid var(--line);background:rgba(16,32,23,.86);color:var(--text);border-radius:14px;padding:10px 12px;font-weight:800}
+.primary{background:linear-gradient(135deg,var(--green),#8cffb1);color:#041008;border:0;border-radius:16px;padding:13px 16px;font-weight:950;box-shadow:0 12px 28px rgba(0,200,83,.22)}
+.secondary{background:#14261b;color:var(--text);border:1px solid var(--line);border-radius:16px;padding:12px 14px;font-weight:850}
+.danger{background:#321516;color:#ffd8d8;border:1px solid #6d2828;border-radius:16px;padding:12px 14px;font-weight:850}
+.card{background:linear-gradient(180deg,rgba(18,37,26,.95),rgba(12,25,18,.95));border:1px solid var(--line);border-radius:24px;padding:16px;margin:12px 0;box-shadow:0 18px 60px rgba(0,0,0,.22)}
+.hero{position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background:
+  linear-gradient(90deg,transparent 49%,rgba(255,255,255,.07) 50%,transparent 51%),
+  radial-gradient(circle at center,transparent 0 48%,rgba(255,255,255,.06) 49%,transparent 50%);
+  opacity:.35;pointer-events:none}
+.hero>*{position:relative}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:#0b1911;border:1px solid var(--line);border-radius:20px;padding:14px}
+.stat b{display:block;font-size:25px;margin-top:4px}.stat span{color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.3px}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin:20px 2px 8px}
+.section-title h2{font-size:18px;margin:0}
+.match-card{padding:0;overflow:hidden}
+.league-pill{display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;background:#0a2a16;color:#b9ffd1;font-size:12px;font-weight:900}
+.scoreboard{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:16px 0}
+.team{text-align:center;font-weight:900;font-size:15px}.team .shirt{margin:0 auto 6px}
+.score{font-size:28px;font-weight:1000;background:#08150d;border:1px solid var(--line);padding:8px 12px;border-radius:16px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;color:var(--muted);font-size:12px}
+.badge{background:#0a1910;border:1px solid var(--line);border-radius:999px;padding:6px 9px}
+.form label{display:block;color:var(--muted);font-weight:850;font-size:12px;margin:13px 0 7px;text-transform:uppercase;letter-spacing:.25px}
+input,select,textarea{width:100%;background:#09160f;color:var(--text);border:1px solid var(--line);border-radius:16px;padding:13px;outline:0}
+textarea{min-height:90px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.note-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.note-btn{border:1px solid var(--line);background:#09160f;color:var(--text);border-radius:14px;padding:12px 0;font-weight:1000}
+.note-btn.active{background:var(--green);color:#041008;border-color:var(--green)}
+.tabs{position:fixed;z-index:10;left:50%;bottom:14px;transform:translateX(-50%);width:min(432px,calc(100% - 22px));background:rgba(6,17,11,.88);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:26px;padding:8px;display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.tab{border:0;background:transparent;color:var(--muted);border-radius:18px;padding:9px 4px;font-size:11px;font-weight:900}
+.tab b{display:block;font-size:18px;line-height:1.1}.tab.active{background:#12351f;color:#baffcf}
+.hidden{display:none!important}
+.auth{max-width:420px;margin:0 auto;min-height:100vh;padding:26px 16px;display:flex;flex-direction:column;justify-content:center}
+.auth .logo{width:86px;height:86px;border-radius:30px;margin:0 auto 14px}.auth .logo svg{width:62px;height:62px}
+.center{text-align:center}.link{background:none;border:0;color:var(--green2);font-weight:900;padding:10px 0}.muted{color:var(--muted)}
+.top-list{display:flex;flex-direction:column;gap:8px}
+.rank{display:flex;align-items:center;justify-content:space-between;background:#09160f;border:1px solid var(--line);border-radius:16px;padding:12px}
+.rank-left{display:flex;align-items:center;gap:10px;font-weight:900}
+.shirt{width:28px;height:30px;display:inline-block;position:relative;border-radius:8px 8px 6px 6px;border:1px solid rgba(255,255,255,.25);box-shadow:inset 0 -7px rgba(0,0,0,.16)}
+.shirt:before,.shirt:after{content:"";position:absolute;top:5px;width:9px;height:15px;background:inherit;border:1px solid rgba(255,255,255,.18)}
+.shirt:before{left:-8px;transform:rotate(20deg);border-radius:7px 0 4px 4px}.shirt:after{right:-8px;transform:rotate(-20deg);border-radius:0 7px 4px 4px}
+.psg{background:linear-gradient(90deg,#102a68 0 40%,#e30613 40% 55%,#102a68 55%)}
+.om,.real,.tottenham{background:#f7f7f7}.arsenal{background:linear-gradient(90deg,#fff 0 25%,#db0007 25% 75%,#fff 75%)}
+.liverpool,.manutd,.bayern,.lille{background:#c8102e}.chelsea,.mancity,.napoli{background:#2f80ed}
+.monaco,.atletico{background:linear-gradient(90deg,#d71920 0 50%,#fff 50%)}.lens{background:linear-gradient(90deg,#ffd200 0 50%,#c8102e 50%)}
+.barca{background:linear-gradient(90deg,#004d98 0 50%,#a50044 50%)}.dortmund{background:linear-gradient(90deg,#f8e71c 0 70%,#111 70%)}
+.juve{background:linear-gradient(90deg,#fff 0 25%,#111 25% 50%,#fff 50% 75%,#111 75%)}.milan{background:linear-gradient(90deg,#d00000 0 50%,#111 50%)}.inter{background:linear-gradient(90deg,#0057b8 0 50%,#111 50%)}
+.default-shirt{background:#607d8b}
+.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:#102017;border:1px solid var(--line);border-radius:16px;padding:12px 16px;box-shadow:0 20px 50px #0008;z-index:20;font-weight:850}
+.actions{display:flex;gap:8px;margin-top:12px}.actions button{flex:1}
+.empty{padding:24px;text-align:center;color:var(--muted)}
+.confirm{position:fixed;inset:0;background:#0009;z-index:30;display:grid;place-items:center;padding:20px}.confirm .card{max-width:380px;width:100%}
+</style>
+
+<style id="premium-polish">
+:root{
+  --bg:#041009;
+  --surface:#0b1a12;
+  --surface2:#102418;
+  --glass:rgba(13,31,20,.78);
+  --line:rgba(139,255,177,.16);
+  --text:#f6fff8;
+  --muted:#9bb5a6;
+  --green:#00d45f;
+  --green2:#a6ffbf;
+  --gold:#ffd166;
+  --red:#ff6b6b;
+  --shadow:0 22px 70px rgba(0,0,0,.38);
+}
+body{
+  background:
+    radial-gradient(circle at 80% -10%,rgba(0,212,95,.22),transparent 28%),
+    radial-gradient(circle at 0% 8%,rgba(166,255,191,.12),transparent 25%),
+    linear-gradient(180deg,#06160d 0%,#030805 75%);
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,transparent 49.7%,rgba(255,255,255,.045) 50%,transparent 50.3%),
+    radial-gradient(circle at 50% 24%,transparent 0 16%,rgba(255,255,255,.045) 16.2%,transparent 16.8%),
+    linear-gradient(180deg,rgba(255,255,255,.025),transparent 35%);
+  opacity:.7;
+}
+.app{
+  max-width:470px;
+  padding:18px 14px 104px;
+}
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:6;
+  margin:-18px -14px 18px;
+  padding:16px 14px 12px;
+  background:linear-gradient(180deg,rgba(4,16,9,.96),rgba(4,16,9,.78),transparent);
+  backdrop-filter:blur(18px);
+}
+.logo{
+  background:
+    linear-gradient(145deg,rgba(0,212,95,.95),rgba(0,89,43,.9)),
+    radial-gradient(circle at 30% 20%,#fff,transparent 25%);
+  box-shadow:0 16px 45px rgba(0,212,95,.28), inset 0 1px rgba(255,255,255,.25);
+}
+.logo.small{
+  width:54px;
+  height:54px;
+  border-radius:19px;
+}
+h1{
+  font-size:20px;
+  letter-spacing:-.6px;
+}
+.subtitle{
+  font-size:12.5px;
+}
+.card{
+  background:
+    linear-gradient(180deg,rgba(20,45,30,.92),rgba(8,22,14,.92));
+  border:1px solid var(--line);
+  border-radius:28px;
+  box-shadow:var(--shadow);
+}
+.hero{
+  padding:18px;
+  background:
+    linear-gradient(145deg,rgba(0,212,95,.18),rgba(16,36,24,.95)),
+    linear-gradient(180deg,rgba(20,45,30,.95),rgba(8,22,14,.95));
+}
+.hero h2{
+  margin:10px 0 14px;
+  font-size:26px;
+  letter-spacing:-.8px;
+}
+.league-pill{
+  background:rgba(0,212,95,.13);
+  color:#caffd8;
+  border:1px solid rgba(0,212,95,.18);
+  padding:7px 11px;
+  font-size:11px;
+}
+.grid{
+  gap:12px;
+}
+.stat{
+  background:linear-gradient(180deg,rgba(8,25,15,.95),rgba(5,16,10,.98));
+  border-color:rgba(166,255,191,.13);
+  border-radius:22px;
+  padding:15px;
+}
+.stat b{
+  font-size:27px;
+  letter-spacing:-.6px;
+}
+.stat span{
+  font-size:10.8px;
+  color:#a8c6b2;
+}
+.section-title{
+  margin:22px 4px 10px;
+}
+.section-title h2{
+  font-size:19px;
+  letter-spacing:-.35px;
+}
+.match-card{
+  background:linear-gradient(180deg,rgba(16,36,24,.96),rgba(7,19,12,.96));
+}
+.match-card > div{
+  padding:17px!important;
+}
+.scoreboard{
+  margin:18px 0;
+  gap:9px;
+}
+.team{
+  font-size:15.5px;
+  line-height:1.15;
+}
+.score{
+  min-width:96px;
+  text-align:center;
+  font-size:30px;
+  border-radius:18px;
+  background:linear-gradient(180deg,#07160e,#030b07);
+  border:1px solid rgba(166,255,191,.16);
+  box-shadow:inset 0 1px rgba(255,255,255,.06);
+}
+.badge{
+  background:rgba(4,14,8,.72);
+  border-color:rgba(166,255,191,.13);
+  color:#c1d5c8;
+}
+.primary{
+  border-radius:18px;
+  min-height:48px;
+  background:linear-gradient(135deg,#00d45f,#a6ffbf);
+  box-shadow:0 18px 34px rgba(0,212,95,.22);
+  transition:.18s transform,.18s filter;
+}
+.primary:active,.secondary:active,.danger:active,.icon-btn:active,.mini-btn:active{
+  transform:scale(.98);
+}
+.secondary,.danger,.icon-btn,.mini-btn{
+  border-radius:16px;
+  min-height:42px;
+}
+.icon-btn{
+  background:linear-gradient(135deg,#00d45f,#a6ffbf);
+  color:#031008;
+  border:0;
+  box-shadow:0 12px 26px rgba(0,212,95,.22);
+}
+.form h2{
+  font-size:23px;
+  margin-top:2px;
+}
+.form label{
+  margin-top:15px;
+  color:#afc8b8;
+  font-size:11px;
+}
+input,select,textarea{
+  border-radius:18px;
+  min-height:48px;
+  background:rgba(4,14,8,.78);
+  border-color:rgba(166,255,191,.14);
+}
+input:focus,select:focus,textarea:focus{
+  border-color:rgba(0,212,95,.7);
+  box-shadow:0 0 0 4px rgba(0,212,95,.12);
+}
+.note-grid{
+  gap:9px;
+}
+.note-btn{
+  border-radius:16px;
+  background:rgba(4,14,8,.78);
+}
+.note-btn.active{
+  box-shadow:0 12px 22px rgba(0,212,95,.2);
+}
+.rank{
+  background:rgba(4,14,8,.68);
+  border-color:rgba(166,255,191,.12);
+  border-radius:18px;
+}
+.tabs{
+  bottom:14px;
+  padding:8px;
+  border-radius:28px;
+  background:rgba(5,17,10,.82);
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+.tab{
+  border-radius:20px;
+  padding:9px 4px;
+}
+.tab.active{
+  background:linear-gradient(180deg,rgba(0,212,95,.2),rgba(0,212,95,.09));
+  color:#d6ffe0;
+  border:1px solid rgba(0,212,95,.16);
+}
+.auth{
+  background:
+    radial-gradient(circle at 50% 10%,rgba(0,212,95,.18),transparent 34%);
+}
+.auth .card{
+  margin-top:18px;
+}
+.auth .brand h1{
+  font-size:28px;
+}
+.auth .brand p{
+  font-size:14px;
+}
+.toast{
+  background:rgba(11,26,18,.96);
+  border-color:rgba(0,212,95,.28);
+}
+.actions{
+  margin-top:14px;
+}
+.empty{
+  color:#a8c6b2;
+}
+@media (max-width:380px){
+  .score{font-size:25px;min-width:82px;padding:8px 9px}
+  .team{font-size:14px}
+  .tab{font-size:9.5px}
+}
+</style>
+
+
+<style id="club-badges-and-ratings">
+.club-logo{
+  width:34px;height:34px;border-radius:50%;
+  display:inline-grid;place-items:center;
+  font-size:11px;font-weight:1000;color:white;
+  border:2px solid rgba(255,255,255,.22);
+  box-shadow:0 8px 18px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.22);
+  margin:0 auto 7px;
+  letter-spacing:-.3px;
+}
+.club-inline{display:inline-flex;align-items:center;gap:9px}
+.club-inline .club-logo{width:30px;height:30px;margin:0;font-size:10px}
+.logo-psg{background:linear-gradient(135deg,#09245f 0 45%,#e30613 45% 58%,#09245f 58%)}
+.logo-om{background:linear-gradient(135deg,#ffffff,#d6f7ff);color:#00a7d8}
+.logo-monaco{background:linear-gradient(135deg,#e30613 0 50%,#fff 50%);color:#111}
+.logo-lens{background:linear-gradient(135deg,#ffd200 0 50%,#c8102e 50%)}
+.logo-lille{background:linear-gradient(135deg,#d71920,#102a68)}
+.logo-nice{background:linear-gradient(135deg,#111 0 50%,#d71920 50%)}
+.logo-rennes{background:linear-gradient(135deg,#e30613,#111)}
+.logo-nantes{background:linear-gradient(135deg,#ffe500,#008a3d)}
+.logo-strasbourg{background:linear-gradient(135deg,#0080ff,#004b99)}
+.logo-lyon{background:linear-gradient(135deg,#fff 0 33%,#e30613 33% 66%,#004b93 66%);color:#111}
+.logo-toulouse{background:linear-gradient(135deg,#6d2ca0,#fff);color:#28103d}
+.logo-brest{background:linear-gradient(135deg,#e30613,#fff);color:#111}
+.logo-reims{background:linear-gradient(135deg,#d71920,#fff);color:#111}
+.logo-lehavre{background:linear-gradient(135deg,#77b5fe,#002b5c)}
+.logo-lorient{background:linear-gradient(135deg,#ff6b00,#111)}
+.logo-angers{background:linear-gradient(135deg,#111 0 50%,#fff 50%);color:#111}
+.logo-arsenal{background:linear-gradient(135deg,#db0007 0 65%,#fff 65%);color:white}
+.logo-liverpool{background:linear-gradient(135deg,#c8102e,#00b2a9)}
+.logo-chelsea{background:linear-gradient(135deg,#034694,#0a2a66)}
+.logo-mancity{background:linear-gradient(135deg,#6cabdd,#1c2c5b)}
+.logo-manutd{background:linear-gradient(135deg,#da020e,#fbe122);color:#111}
+.logo-tottenham{background:linear-gradient(135deg,#fff,#132257);color:#132257}
+.logo-newcastle{background:linear-gradient(135deg,#111 0 25%,#fff 25% 50%,#111 50% 75%,#fff 75%);color:#111}
+.logo-astonvilla{background:linear-gradient(135deg,#95bfe5 0 55%,#670e36 55%)}
+.logo-everton{background:linear-gradient(135deg,#003399,#0b1b5e)}
+.logo-wolves{background:linear-gradient(135deg,#fdb913,#111);color:#111}
+.logo-real{background:linear-gradient(135deg,#fff,#f5d76e);color:#111}
+.logo-barca{background:linear-gradient(135deg,#004d98 0 50%,#a50044 50%)}
+.logo-atletico{background:linear-gradient(135deg,#d71920 0 25%,#fff 25% 50%,#d71920 50% 75%,#fff 75%);color:#111}
+.logo-betis{background:linear-gradient(135deg,#00954c 0 50%,#fff 50%);color:#111}
+.logo-sociedad{background:linear-gradient(135deg,#0067b1 0 50%,#fff 50%);color:#111}
+.logo-villarreal{background:linear-gradient(135deg,#ffe500,#004ea8);color:#111}
+.logo-valencia{background:linear-gradient(135deg,#fff 0 33%,#ff8200 33% 66%,#111 66%);color:#111}
+.logo-juve{background:linear-gradient(135deg,#111 0 25%,#fff 25% 50%,#111 50% 75%,#fff 75%);color:#111}
+.logo-milan{background:linear-gradient(135deg,#d00000 0 50%,#111 50%)}
+.logo-inter{background:linear-gradient(135deg,#0057b8 0 50%,#111 50%)}
+.logo-napoli{background:linear-gradient(135deg,#12a8e0,#0065a8)}
+.logo-lazio{background:linear-gradient(135deg,#87ceeb,#fff);color:#1b4d89}
+.logo-roma{background:linear-gradient(135deg,#8e1f2f,#f0bc42)}
+.logo-udinese{background:linear-gradient(135deg,#111 0 50%,#fff 50%);color:#111}
+.logo-bayern{background:linear-gradient(135deg,#dc052d,#0066b2)}
+.logo-dortmund{background:linear-gradient(135deg,#fdeb00,#111);color:#111}
+.logo-leverkusen{background:linear-gradient(135deg,#e32221,#111)}
+.logo-leipzig{background:linear-gradient(135deg,#fff 0 50%,#e30613 50%);color:#111}
+.logo-wolfsburg{background:linear-gradient(135deg,#65b32e,#fff);color:#17420f}
+.logo-default{background:linear-gradient(135deg,#244b35,#00d45f)}
+.rating-word{
+  margin-top:10px;
+  padding:11px 13px;
+  border-radius:16px;
+  background:rgba(0,212,95,.10);
+  border:1px solid rgba(0,212,95,.20);
+  color:#d6ffe0;
+  font-weight:900;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.rating-word small{color:#9bb5a6;font-weight:800}
+</style>
+
+
+<style id="desired-interface-v12">
+body{
+  background:
+    radial-gradient(circle at 50% 20%,rgba(0,212,95,.10),transparent 22%),
+    radial-gradient(circle at 10% 0%,rgba(0,212,95,.18),transparent 28%),
+    linear-gradient(180deg,#03100b,#020605 82%)!important;
+}
+.app{max-width:520px!important}
+.topbar{
+  border-bottom:1px solid rgba(0,212,95,.08);
+}
+.icon-btn{font-size:15px;padding:13px 18px!important;border-radius:18px!important}
+.hero{display:none}
+#home:before{
+  content:"";
+  display:block;
+  height:0;
+}
+#home .grid:first-of-type,
+#home .card.hero + .section-title{display:none}
+.card.hero{display:block!important}
+.card.hero h2,.card.hero .league-pill,.card.hero p{display:none!important}
+.card.hero .grid{display:grid!important;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:0}
+.stat.feature{
+  min-height:130px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+  background:linear-gradient(180deg,rgba(6,33,23,.92),rgba(4,17,12,.94))!important;
+}
+.stat.feature .big-icon{font-size:32px;line-height:1;color:#32e06c}
+.stat.feature b{font-size:30px!important;color:white}
+.stat.feature small{font-size:13px;color:#d7e5dc;line-height:1.35}
+.stat.feature span:not(.big-icon){display:none}
+#ticketSeason{color:#46e879!important}
+#lastMatch.card{padding:6px 14px}
+.compact-match{
+  display:grid;
+  grid-template-columns:1fr auto 1fr 34px;
+  gap:10px;
+  align-items:center;
+  padding:13px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.compact-match:last-child{border-bottom:0}
+.compact-team{font-weight:800;font-size:13px}
+.compact-team .club-inline{gap:7px}
+.compact-team .club-logo{width:30px;height:30px}
+.compact-team.right{text-align:right}
+.compact-team.right .club-inline{flex-direction:row-reverse}
+.compact-score{text-align:center;white-space:nowrap}
+.compact-score b{font-size:20px}
+.compact-score small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.compact-rating{font-size:25px;text-align:right}
+.card h3{font-size:19px;margin:0 0 14px}
+.rank{min-height:58px}
+.rank b{color:#39e877}
+.rating-word span{font-size:18px}
+.rating-word small{font-size:14px}
+.badge{font-weight:800}
+.club-logo{font-size:9px}
+.tabs{grid-template-columns:repeat(5,1fr)!important}
+@media(max-width:430px){
+  .card.hero .grid{grid-template-columns:1fr 1fr}
+  .stat.feature{min-height:112px}
+}
+</style>
+
+
+<style id="launch-polish">
+.stats-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 14px}
+.stats-switch button{border:1px solid rgba(166,255,191,.14);background:rgba(4,14,8,.78);color:#d7e5dc;border-radius:18px;padding:12px;font-weight:950}
+.stats-switch button.active{background:linear-gradient(135deg,#00d45f,#a6ffbf);color:#031008;border:0}
+.launch-note{font-size:12px;color:#9bb5a6;text-align:center;margin-top:8px}
+</style>
+
+
+<link rel="icon" href="./favicon.ico">
+<link rel="apple-touch-icon" href="./assets/logo-192.png">
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#06110b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cahier Matchs">
+<style id="official-logo-style">
+.logo{
+  background-image:url("./assets/logo-app.png") !important;
+  background-size:cover !important;
+  background-position:center !important;
+  color:transparent !important;
+  overflow:hidden;
+}
+.logo::before,.logo::after{display:none!important}
+</style>
+
+</head>
+<body>
+<div id="toast" class="toast hidden"></div>
+
+<section id="auth" class="auth">
+  <div class="center">
+    <div class="logo" aria-label="logo"></div>
+    <h1>Le Cahier des Matchs</h1>
+    <p class="subtitle">Notez. Revivez. Archivez vos saisons.</p>
+  </div>
+
+  <div id="loginBox" class="card form">
+    <h2>Connexion</h2>
+    <label>Email</label><input id="loginEmail" type="email" placeholder="email@exemple.com">
+    <label>Mot de passe</label><input id="loginPassword" type="password" placeholder="••••••••">
+    <button class="primary" onclick="login()">Se connecter</button>
+    <button class="link" onclick="showAuth('forgot')">Mot de passe oublié ?</button>
+    <p class="muted">Pas encore de compte ? <button class="link" onclick="showAuth('register')">Créer un compte</button></p>
+    <p class="muted" style="font-size:12px">Version test : créez d’abord un compte. Il sera conservé dans ce navigateur.</p>
+  </div>
+
+  <div id="registerBox" class="card form hidden">
+    <h2>Créer un compte</h2>
+    <label>Prénom *</label><input id="regFirst" placeholder="Prénom">
+    <label>Pseudo</label><input id="regPseudo" placeholder="Pseudo optionnel">
+    <label>Email *</label><input id="regEmail" type="email" placeholder="email@exemple.com">
+    <label>Mot de passe *</label><input id="regPassword" type="password" placeholder="Minimum 6 caractères">
+    <label>Confirmer le mot de passe *</label><input id="regConfirm" type="password" placeholder="Confirmer">
+    <button class="primary" onclick="register()">Créer mon compte</button>
+    <button class="link" onclick="showAuth('login')">Retour à la connexion</button>
+  </div>
+
+  <div id="forgotBox" class="card form hidden">
+    <h2>Réinitialisation</h2>
+    <p class="muted">Saisissez uniquement votre adresse e-mail. En production, un lien sécurisé sera envoyé.</p>
+    <label>Email</label><input id="forgotEmail" type="email" placeholder="email@exemple.com">
+    <button class="primary" onclick="sendReset()">Envoyer le lien de réinitialisation</button>
+    <button class="link" onclick="showAuth('login')">Retour à la connexion</button>
+  </div>
+</section>
+
+<main id="app" class="app hidden">
+  <div class="topbar">
+    <div class="logo-wrap">
+      <div class="logo"></div>
+      <div>
+        <h1>Le Cahier des Matchs</h1>
+        <div class="subtitle" id="hello">Carnet personnel de matchs</div>
+      </div>
+    </div>
+    <button class="icon-btn" onclick="go('add')">+ Ajouter</button>
+  </div>
+
+  <section id="home" class="screen">
+    <div class="card hero">
+      <span class="league-pill">◉ Tableau de bord</span><p class="muted">Carnet personnel — sauvegarde locale + export possible.</p>
+      <h2 id="homeTitle">Cette saison</h2>
+      <div class="grid">
+        <div class="stat feature"><span class="big-icon">👁️</span><b id="seasonCount">0</b><small>Matchs vus<br>cette saison</small></div>
+        <div class="stat feature"><span class="big-icon">📺</span><b id="careerCount">0</b><small>Total carrière</small></div>
+        <div class="stat feature"><span class="big-icon">📺</span><b id="tvCount">0</b><small>Matchs à la TV</small></div>
+        <div class="stat feature"><span class="big-icon">🏟️</span><b id="stadiumCount">0</b><small>Matchs au stade</small></div>
+        <div class="stat feature"><span class="big-icon">🎟️</span><b id="ticketSeason">0€</b><small>Dépenses billets<br>cette saison</small></div>
+      </div>
+    </div>
+    <div class="section-title"><h2>⭐ Derniers matchs ajoutés</h2></div>
+    <div id="lastMatch" class="card empty">Aucun match enregistré.</div>
+  </section>
+
+  <section id="matches" class="screen hidden">
+    <div class="section-title"><h2>Matchs de la saison</h2><button class="mini-btn" onclick="go('add')">+ Ajouter</button></div>
+    <div id="matchList"></div>
+  </section>
+
+  <section id="add" class="screen hidden">
+    <div class="card form">
+      <h2>Ajouter un match</h2>
+      <label>Championnat</label>
+      <select id="competition" onchange="fillTeams()"></select>
+      <div class="row">
+        <div><label>Domicile</label><select id="homeTeam"></select></div>
+        <div><label>Extérieur</label><select id="awayTeam"></select></div>
+      </div>
+      <div class="row">
+        <div><label>Score domicile</label><input id="homeScore" type="number" min="0" placeholder="0"></div>
+        <div><label>Score extérieur</label><input id="awayScore" type="number" min="0" placeholder="0"></div>
+      </div>
+      <label>Note du match</label>
+      <div id="noteGrid" class="note-grid"></div><div id="matchRatingWord" class="rating-word hidden"></div>
+      <label>Homme du match</label><input id="motm" placeholder="Nom du joueur">
+      <label>Joueur à suivre</label><input id="watchPlayer" placeholder="Nom du joueur">
+      <label>Arbitre</label><select id="referee"></select>
+      <label>Note arbitre</label><div id="refNoteGrid" class="note-grid"></div><div id="refRatingWord" class="rating-word hidden"></div>
+      <label>Où avez-vous regardé ?</label>
+      <select id="watchPlace" onchange="toggleStadium()"><option>📺 Télévision</option><option>🏟️ Stade</option></select>
+      <div id="stadiumFields" class="hidden">
+        <label>Nom du stade</label><input id="stadiumName" list="stadiums" placeholder="Nom du stade">
+        <datalist id="stadiums"></datalist>
+        <div class="row">
+          <div><label>Prix billet</label><input id="ticketPrice" type="number" min="0" placeholder="€"></div>
+          <div><label>Avec qui ?</label><input id="withPeople" placeholder="Pierre, Julien"></div>
+        </div>
+      </div>
+      <label>Commentaire</label><textarea id="comment" placeholder="Scénario, ambiance, niveau du match..."></textarea>
+      <button class="primary" id="saveMatchButton" onclick="saveMatch()">Enregistrer le match</button>
+    </div>
+  </section>
+
+  <section id="stats" class="screen hidden">
+    <div class="section-title"><h2>Statistiques</h2></div><div class="stats-switch"><button id="statsSeasonBtn" class="active" onclick="setStatsMode('season')">📅 Saison</button><button id="statsCareerBtn" onclick="setStatsMode('career')">🏆 Totaux</button></div>
+    <div class="grid">
+      <div class="stat"><span id="sTotalLabel">Matchs vus</span><b id="sTotal">0</b></div>
+      <div class="stat"><span>Note moyenne</span><b id="sAvg">—</b></div>
+      <div class="stat"><span>Matchs TV</span><b id="sTv">0</b></div>
+      <div class="stat"><span>Matchs stade</span><b id="sStadium">0</b></div>
+      <div class="stat"><span>Dépenses billets saison</span><b id="sTickets">0€</b></div>
+    </div>
+    
+    <div class="card"><h3>💳 Carte supporter</h3><div id="supporterCard" class="top-list"></div></div>
+    <div class="card"><h3>💶 Billet le plus cher</h3><div id="expensiveTicket"></div></div>
+
+    <div class="card"><h3>🏆 Top 3 équipes les plus vues</h3><div id="topTeams" class="top-list"></div></div>
+    <div class="card"><h3>🌐 Top 3 championnats les plus vus</h3><div id="topCompetitions" class="top-list"></div></div>
+    <div class="card"><h3>🟨 Arbitres classés par moyenne</h3><div id="topRefs" class="top-list"></div></div>
+    <div class="card"><h3>🏅 Match de la saison</h3><div id="bestMatch"></div></div>
+  </section>
+
+  <section id="archives" class="screen hidden">
+    <div class="card">
+      <h3>Clôturer la saison</h3>
+      <p class="muted"><span id="archiveCount">0</span> matchs enregistrés cette saison.</p><p class="muted">💶 Billets cette saison : <b id="archiveTickets">0€</b></p>
+      <button class="primary" onclick="archiveSeason()">🏆 Archiver la saison</button>
+    </div>
+    <div class="section-title"><h2>Saisons archivées</h2></div>
+    <div id="archivesList"></div>
+  </section>
+
+  <section id="profile" class="screen hidden">
+    <div class="card">
+      <h2>Mon espace personnel</h2>
+      <p><b>Prénom :</b> <span id="pFirst"></span></p>
+      <p><b>Pseudo :</b> <span id="pPseudo"></span></p>
+      <p class="muted">Version sans compte : les données restent sur cet appareil. Utilisez Exporter / Importer pour changer de téléphone.</p>
+      <button class="secondary" onclick="toast('Modification de profil prévue pour la version production.')">Modifier le profil</button>
+      <button class="secondary" onclick="exportData()">Exporter mes données</button><button class="secondary" onclick="importData()">Importer des données</button>
+    </div>
+  </section>
+
+  <nav class="tabs">
+    <button class="tab active" onclick="go('home')"><b>🏠</b>Accueil</button>
+    <button class="tab" onclick="go('matches')"><b>⚽</b>Matchs</button>
+    <button class="tab" onclick="go('stats')"><b>📊</b>Stats</button>
+    <button class="tab" onclick="go('archives')"><b>🏆</b>Archives</button>
+    <button class="tab" onclick="go('profile')"><b>●</b>Profil</button>
+  </nav>
+</main>
+
+<div id="confirm" class="confirm hidden">
+  <div class="card">
+    <h2>Se déconnecter ?</h2>
+    <p class="muted">Vous devrez vous reconnecter pour retrouver vos matchs.</p>
+    <div class="actions"><button class="secondary" onclick="hideConfirm()">Annuler</button><button class="danger" onclick="logout()">Déconnexion</button></div>
+  </div>
+</div>
+
+<script>
+const logoSvg = `<img src="data:image/jpeg;base64,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" alt="Le Cahier des Matchs" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`;
+document.querySelectorAll('.logo').forEach(el=>el.innerHTML=logoSvg);
+
+const DB_KEY="cahier_matchs_option_a_finale";
+const sessionKey="cahier_current_user";
+const competitions={
+"🇫🇷 Ligue 1":["PSG","OM","Monaco","Nice","Lille","Lyon","Strasbourg","Lens","Brest","Toulouse","Auxerre","Nantes","Rennes","Angers","Le Havre","Metz","Lorient","Paris FC"],
+"🇫🇷 Ligue 2":["Saint-Étienne","Montpellier","Reims","Troyes","Dunkerque","Guingamp","Laval","Bastia","Grenoble","Rodez","Amiens","Pau","Annecy","Clermont","Red Star","Boulogne","Le Mans","Nancy"],
+"🇬🇧 Premier League":["Liverpool","Arsenal","Manchester City","Chelsea","Newcastle","Aston Villa","Nottingham Forest","Brighton","Bournemouth","Brentford","Fulham","Crystal Palace","Everton","West Ham","Tottenham","Manchester United","Wolverhampton","Burnley","Leeds United","Sunderland"],
+"🇪🇸 Liga":["FC Barcelone","Real Madrid","Atlético Madrid","Athletic Bilbao","Villarreal","Betis","Celta Vigo","Rayo Vallecano","Osasuna","Majorque","Real Sociedad","Valence","Getafe","Espanyol","Alavés","Gérone","Séville","Levante","Elche","Real Oviedo"],
+"🇮🇹 Serie A":["Inter","Naples","Roma","Milan","Juventus","Atalanta","Bologne","Fiorentina","Lazio","Como","Torino","Udinese","Genoa","Parma","Cagliari","Lecce","Sassuolo","Cremonese","Pisa","Hellas Vérone"],
+"🇩🇪 Bundesliga":["Bayern Munich","Leverkusen","Eintracht Francfort","Dortmund","Fribourg","Mayence","RB Leipzig","Werder Brême","Stuttgart","Augsbourg","Wolfsburg","Mönchengladbach","Union Berlin","St. Pauli","Hoffenheim","Heidenheim","Hambourg","Cologne"],
+"🇳🇱 Eredivisie":["PSV","Ajax","Feyenoord","AZ Alkmaar","Twente","Utrecht","Groningen","Heerenveen","Sparta Rotterdam","NEC Nimègue","PEC Zwolle","Heracles","NAC Breda","Go Ahead Eagles","Fortuna Sittard","Excelsior","Volendam","Telstar"],
+"🇵🇹 Liga Portugal":["Sporting CP","Benfica","Porto","Braga","Vitória Guimarães","Santa Clara","Famalicão","Casa Pia","Moreirense","Estoril","Rio Ave","Arouca","Gil Vicente","Nacional","AVS","Alverca","Tondela","Estrela Amadora"],
+"🇧🇪 Jupiler Pro League":["Club Bruges","Union Saint-Gilloise","Anderlecht","Genk","Antwerp","Standard Liège","La Gantoise","Charleroi","Malines","Cercle Bruges","OH Louvain","Westerlo","Saint-Trond","Courtrai","Dender","Zulte Waregem"],
+"🇪🇺 Champions League":["PSG","OM","Monaco","Liverpool","Arsenal","Manchester City","Chelsea","FC Barcelone","Real Madrid","Atlético Madrid","Inter","Naples","Juventus","Bayern Munich","Dortmund","Leverkusen","PSV","Ajax","Benfica","Porto"],
+"🇪🇺 Europa League":["Lyon","Lille","Nice","Tottenham","Manchester United","Aston Villa","Real Sociedad","Betis","Roma","Lazio","Milan","Eintracht Francfort","Braga","Fenerbahçe","Galatasaray","Feyenoord"],
+"🇪🇺 Conference League":["Strasbourg","Lens","Crystal Palace","Fiorentina","Villarreal","Mayence","AZ Alkmaar","Twente","Anderlecht","Club Bruges","Başakşehir","Trabzonspor"],
+"🌍 Coupe du Monde":["France","Angleterre","Espagne","Italie","Allemagne","Portugal","Pays-Bas","Belgique","Brésil","Argentine","Uruguay","Croatie","Maroc","Sénégal","Japon","États-Unis"],
+"🇪🇺 Euro":["France","Angleterre","Espagne","Italie","Allemagne","Portugal","Pays-Bas","Belgique","Croatie","Suisse","Danemark","Autriche","Turquie","Pologne","Écosse","Ukraine"],
+"🇫🇷 Coupe de France":["PSG","OM","Monaco","Nice","Lille","Lyon","Strasbourg","Lens","Brest","Toulouse","Auxerre","Nantes","Rennes","Angers","Le Havre","Metz","Lorient","Paris FC","Saint-Étienne","Montpellier","Reims","Troyes","Bastia","Nancy","Red Star"]
+};
+
+function sortedTeams(list){
+ return [...list].sort((a,b)=>a.localeCompare(b,"fr",{sensitivity:"base"}));
+}
+
+const shirtClass={"PSG":"psg","OM":"om","Monaco":"monaco","Lens":"lens","Lille":"lille","Arsenal":"arsenal","Liverpool":"liverpool","Chelsea":"chelsea","Manchester City":"mancity","Manchester United":"manutd","Tottenham":"tottenham","Real Madrid":"real","FC Barcelone":"barca","Atlético Madrid":"atletico","Bayern Munich":"bayern","Dortmund":"dortmund","Juventus":"juve","Milan":"milan","Inter":"inter","Naples":"napoli"};
+const referees=["Non renseigné","Clément Turpin","François Letexier","Benoît Bastien","Jérôme Brisard","Willy Delajod","Ruddy Buquet","Eric Wattellier","Hakim Ben El Hadj","Thomas Léonard","Mathieu Vernice","Florent Batta","Stéphanie Frappart","Bastien Dechepy","Marc Bollengier"];
+const stadiums=["Parc des Princes","Orange Vélodrome","Stade de France","Groupama Stadium","Stade Pierre-Mauroy","Allianz Riviera","Stade Bollaert-Delelis","Stade de la Meinau","Stade Geoffroy-Guichard","Stade de la Beaujoire","Stade Francis-Le Blé","Anfield","Emirates Stadium","Old Trafford","Etihad Stadium","Santiago Bernabéu","Camp Nou","San Siro","Allianz Arena"];
+
+const clubLogos={
+ "PSG":["PSG","logo-psg"],"OM":["OM","logo-om"],"Monaco":["ASM","logo-monaco"],"Nice":["OGCN","logo-nice"],"Lille":["LOSC","logo-lille"],"Lyon":["OL","logo-lyon"],"Strasbourg":["RCS","logo-strasbourg"],"Lens":["RCL","logo-lens"],"Brest":["SB29","logo-brest"],"Toulouse":["TFC","logo-toulouse"],"Auxerre":["AJA","logo-default"],"Nantes":["FCN","logo-nantes"],"Rennes":["SRFC","logo-rennes"],"Angers":["SCO","logo-angers"],"Le Havre":["HAC","logo-lehavre"],"Metz":["FCM","logo-default"],"Lorient":["FCL","logo-lorient"],"Paris FC":["PFC","logo-default"],
+ "Saint-Étienne":["ASSE","logo-default"],"Montpellier":["MHSC","logo-default"],"Reims":["SDR","logo-reims"],"Troyes":["ESTAC","logo-default"],"Dunkerque":["USLD","logo-default"],"Guingamp":["EAG","logo-default"],"Laval":["LAV","logo-default"],"Bastia":["SCB","logo-default"],"Grenoble":["GF38","logo-default"],"Rodez":["RAF","logo-default"],"Amiens":["ASC","logo-default"],"Pau":["PAU","logo-default"],"Annecy":["FCA","logo-default"],"Clermont":["CF63","logo-default"],"Red Star":["RED","logo-default"],"Boulogne":["USBCO","logo-default"],"Le Mans":["LMFC","logo-default"],"Nancy":["ASNL","logo-default"],
+ "Arsenal":["ARS","logo-arsenal"],"Liverpool":["LIV","logo-liverpool"],"Chelsea":["CHE","logo-chelsea"],"Manchester City":["MCI","logo-mancity"],"Manchester United":["MU","logo-manutd"],"Tottenham":["TOT","logo-tottenham"],"Newcastle":["NEW","logo-newcastle"],"Aston Villa":["AVL","logo-astonvilla"],"Everton":["EVE","logo-everton"],"Wolverhampton":["WOL","logo-wolves"],"Nottingham Forest":["NFO","logo-default"],"Brighton":["BHA","logo-default"],"Bournemouth":["BOU","logo-default"],"Brentford":["BRE","logo-default"],"Fulham":["FUL","logo-default"],"Crystal Palace":["CRY","logo-default"],"West Ham":["WHU","logo-default"],"Burnley":["BUR","logo-default"],"Leeds United":["LEE","logo-default"],"Sunderland":["SUN","logo-default"],
+ "Real Madrid":["RMA","logo-real"],"FC Barcelone":["BAR","logo-barca"],"Atlético Madrid":["ATM","logo-atletico"],"Athletic Bilbao":["ATH","logo-default"],"Betis":["BET","logo-betis"],"Celta Vigo":["CEL","logo-default"],"Rayo Vallecano":["RAY","logo-default"],"Osasuna":["OSA","logo-default"],"Majorque":["MLL","logo-default"],"Real Sociedad":["RSO","logo-sociedad"],"Valence":["VAL","logo-valencia"],"Getafe":["GET","logo-default"],"Espanyol":["ESP","logo-default"],"Alavés":["ALA","logo-default"],"Gérone":["GIR","logo-default"],"Séville":["SEV","logo-default"],"Levante":["LEV","logo-default"],"Elche":["ELC","logo-default"],"Real Oviedo":["OVI","logo-default"],
+ "Juventus":["JUV","logo-juve"],"Milan":["ACM","logo-milan"],"Inter":["INT","logo-inter"],"Naples":["NAP","logo-napoli"],"Roma":["ROM","logo-roma"],"Atalanta":["ATA","logo-default"],"Bologne":["BOL","logo-default"],"Fiorentina":["FIO","logo-default"],"Lazio":["LAZ","logo-lazio"],"Como":["COM","logo-default"],"Torino":["TOR","logo-default"],"Udinese":["UDI","logo-udinese"],"Genoa":["GEN","logo-default"],"Parma":["PAR","logo-default"],"Cagliari":["CAG","logo-default"],"Lecce":["LEC","logo-default"],"Sassuolo":["SAS","logo-default"],"Cremonese":["CRE","logo-default"],"Pisa":["PIS","logo-default"],"Hellas Vérone":["VER","logo-default"],
+ "Bayern Munich":["BAY","logo-bayern"],"Dortmund":["BVB","logo-dortmund"],"Leverkusen":["B04","logo-leverkusen"],"RB Leipzig":["RBL","logo-leipzig"],"Wolfsburg":["WOB","logo-wolfsburg"],"Eintracht Francfort":["SGE","logo-default"],"Fribourg":["SCF","logo-default"],"Mayence":["M05","logo-default"],"Werder Brême":["SVW","logo-default"],"Stuttgart":["VFB","logo-default"],"Augsbourg":["FCA","logo-default"],"Mönchengladbach":["BMG","logo-default"],"Union Berlin":["FCU","logo-default"],"St. Pauli":["STP","logo-default"],"Hoffenheim":["TSG","logo-default"],"Heidenheim":["FCH","logo-default"],"Hambourg":["HSV","logo-default"],"Cologne":["KOE","logo-default"],
+ "PSV":["PSV","logo-default"],"Ajax":["AJA","logo-default"],"Feyenoord":["FEY","logo-default"],"AZ Alkmaar":["AZ","logo-default"],"Twente":["TWE","logo-default"],"Utrecht":["UTR","logo-default"],"Sporting CP":["SCP","logo-default"],"Benfica":["BEN","logo-default"],"Porto":["FCP","logo-default"],"Braga":["SCB","logo-default"],"Club Bruges":["BRU","logo-default"],"Union Saint-Gilloise":["USG","logo-default"],"Anderlecht":["AND","logo-default"],"Genk":["GNK","logo-default"],"Galatasaray":["GAL","logo-default"],"Fenerbahçe":["FEN","logo-default"],"Beşiktaş":["BJK","logo-default"],"Trabzonspor":["TRA","logo-default"]
+};
+const matchRatingWords={10:"Match légendaire",9:"Match exceptionnel",8:"Très bon match",7:"Bon match",6:"Match moyen",5:"Match correct",4:"Match décevant",3:"Mauvais match",2:"Très mauvais match",1:"Match catastrophique"};
+const refRatingWords={10:"Arbitrage légendaire",9:"Excellent arbitrage",8:"Très bon arbitrage",7:"Bon arbitrage",6:"Arbitrage moyen",5:"Arbitrage correct",4:"Arbitrage décevant",3:"Mauvais arbitrage",2:"Très mauvais arbitrage",1:"Arbitrage catastrophique"};
+
+const matchRatingEmojis={10:"🔥",9:"🤩",8:"😀",7:"🙂",6:"😐",5:"😕",4:"☹️",3:"😡",2:"🤬",1:"🤯"};
+const refRatingEmojis={10:"🙌",9:"🤩",8:"😀",7:"🙂",6:"😐",5:"😕",4:"☹️",3:"😡",2:"🤬",1:"🟥"};
+
+
+function clubLogo(team,inline=false){
+ const data=clubLogos[team]||[(team||"?").split(" ").map(w=>w[0]).join("").slice(0,3).toUpperCase(),"logo-default"];
+ return `<span class="${inline?'club-inline':''}"><span class="club-logo ${data[1]}">${data[0]}</span>${inline?`<span>${team}</span>`:""}</span>`;
+}
+function ratingText(n,type="match"){
+ if(!n) return "";
+ return type==="ref" ? refRatingWords[n] : matchRatingWords[n];
+}
+
+
+
+Object.keys(competitions).forEach(k=>{
+ competitions[k]=sortedTeams(competitions[k]);
+});
+
+let state={users:{},current:null};
+let selectedRating=null, selectedRefRating=null, editingMatchId=null, statsMode='season';
+
+function load(){ state=JSON.parse(localStorage.getItem(DB_KEY)||'{"users":{},"current":null}'); state.current=localStorage.getItem(sessionKey)||state.current; }
+function save(){ localStorage.setItem(DB_KEY,JSON.stringify(state)); if(state.current)localStorage.setItem(sessionKey,state.current); }
+function user(){ return state.users[state.current]; }
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.remove('hidden'); setTimeout(()=>t.classList.add('hidden'),2400); }
+function showAuth(which){["login","register","forgot"].forEach(x=>document.getElementById(x+"Box").classList.toggle("hidden",x!==which)); }
+function register(){
+ const first=regFirst.value.trim(), pseudo=regPseudo.value.trim(), email=regEmail.value.trim().toLowerCase(), pass=regPassword.value, conf=regConfirm.value;
+ if(!first||!email||!pass||!conf) return toast("Remplissez les champs obligatoires.");
+ if(pass.length<6) return toast("Mot de passe : 6 caractères minimum.");
+ if(pass!==conf) return toast("Les mots de passe ne correspondent pas.");
+ if(state.users[email]) return toast("Un compte existe déjà avec cet email.");
+ state.users[email]={first,pseudo,email,pass:String(pass),matches:[],archives:[]};
+ state.current=email;
+ save();
+ boot();
+ toast("Compte créé et connecté.");
+}
+function login(){
+ const email=loginEmail.value.trim().toLowerCase();
+ const pass=loginPassword.value;
+ if(!email || !pass) return toast("Saisissez votre email et votre mot de passe.");
+ const account=state.users[email];
+ if(!account) return toast("Aucun compte trouvé avec cet email. Créez d'abord un compte.");
+ if(String(account.pass)!==String(pass)) return toast("Mot de passe incorrect.");
+ state.current=email;
+ save();
+ boot();
+ toast("Connexion réussie.");
+}
+function sendReset(){
+ const email=forgotEmail.value.trim().toLowerCase();
+ if(!email) return toast("Saisissez votre email.");
+ toast("Email envoyé : en production, le lien sécurisé arrivera dans la boîte mail.");
+ showAuth('login');
+}
+function confirmLogout(){ document.getElementById("confirm").classList.remove("hidden"); }
+function hideConfirm(){ document.getElementById("confirm").classList.add("hidden"); }
+function logout(){
+ state.current=null;
+ localStorage.removeItem(sessionKey);
+ localStorage.setItem(DB_KEY, JSON.stringify(state));
+ location.reload();
+}
+
+function initForm(){
+ const comp=document.getElementById("competition");
+ comp.innerHTML=Object.keys(competitions).map(c=>`<option>${c}</option>`).join("")+`<option value="manual">✍️ Saisie manuelle</option>`;
+ document.getElementById("referee").innerHTML=referees.map(r=>`<option>${r}</option>`).join("");
+ document.getElementById("stadiums").innerHTML=stadiums.map(s=>`<option value="${s}">`).join("");
+ noteGrid.innerHTML=[1,2,3,4,5,6,7,8,9,10].map(n=>`<button type="button" class="note-btn" title="${ratingText(n)}" onclick="setRating(${n})">${n}</button>`).join("");
+ refNoteGrid.innerHTML=[1,2,3,4,5,6,7,8,9,10].map(n=>`<button type="button" class="note-btn" title="${ratingText(n,"ref")}" onclick="setRefRating(${n})">${n}</button>`).join("");
+ fillTeams();
+}
+function fillTeams(){
+ const teams=sortedTeams(competitions[competition.value]||[]);
+ if(competition.value==="manual"){
+   homeTeam.innerHTML='<option value="">✍️ Saisie manuelle</option>';
+   awayTeam.innerHTML='<option value="">✍️ Saisie manuelle</option>';
+   return;
+ }
+ homeTeam.innerHTML='<option value="">Choisir</option>'+teams.map(t=>`<option value="${t}">${t}</option>`).join("")+'<option value="manual">✍️ Saisie manuelle</option>';
+ awayTeam.innerHTML='<option value="">Choisir</option>'+teams.map(t=>`<option value="${t}">${t}</option>`).join("")+'<option value="manual">✍️ Saisie manuelle</option>';
+}
+function setRating(n){ selectedRating=n; [...noteGrid.children].forEach((b,i)=>b.classList.toggle("active",i+1===n)); matchRatingWord.classList.remove("hidden"); matchRatingWord.innerHTML=`<span>${matchRatingEmojis[n]} ${n}/10</span><small>${ratingText(n)}</small>`; }
+function setRefRating(n){ selectedRefRating=n; [...refNoteGrid.children].forEach((b,i)=>b.classList.toggle("active",i+1===n)); refRatingWord.classList.remove("hidden"); refRatingWord.innerHTML=`<span>${refRatingEmojis[n]} ${n}/10</span><small>${ratingText(n,"ref")}</small>`; }
+function toggleStadium(){ stadiumFields.classList.toggle("hidden", watchPlace.value!=="🏟️ Stade"); }
+function shirt(team){ return ``; }
+function teamLabel(team){ return `${shirt(team)} <span>${team||"—"}</span>`; }
+
+function saveMatch(){
+ let comp=competition.value;
+ if(comp==="manual") comp=prompt("Nom du championnat :")||"";
+ let home=homeTeam.value, away=awayTeam.value;
+ if(competition.value==="manual" || home==="manual" || !home) home=prompt("Équipe domicile :")||"";
+ if(competition.value==="manual" || away==="manual" || !away) away=prompt("Équipe extérieure :")||"";
+ if(!comp||!home||!away) return toast("Indiquez le championnat et les équipes.");
+ if(selectedRating===null) return toast("Choisissez une note de 1 à 10.");
+
+ const m={id:editingMatchId||Date.now(),date:editingMatchId?(user().matches.find(x=>x.id===editingMatchId)?.date||new Date().toLocaleDateString("fr-FR")):new Date().toLocaleDateString("fr-FR"),competition:comp,home,away,homeScore:homeScore.value||"0",awayScore:awayScore.value||"0",rating:selectedRating,motm:motm.value.trim(),watchPlayer:watchPlayer.value.trim(),referee:referee.value,refRating:selectedRefRating,place:watchPlace.value,stadium:stadiumName.value.trim(),ticket:ticketPrice.value,people:withPeople.value.trim(),comment:comment.value.trim()};
+
+ if(editingMatchId){
+   user().matches=user().matches.map(match=>match.id===editingMatchId?m:match);
+   toast("Match modifié.");
+ } else {
+   user().matches.unshift(m);
+   toast("Match enregistré.");
+ }
+
+ save();
+ editingMatchId=null;
+ resetForm();
+ render();
+ go("home");
+}
+function resetForm(){
+ document.querySelectorAll("#add input,#add textarea").forEach(x=>x.value="");
+ selectedRating=null; selectedRefRating=null;
+ [...noteGrid.children,...refNoteGrid.children].forEach(b=>b.classList.remove("active")); if(document.getElementById("matchRatingWord")) matchRatingWord.classList.add("hidden"); if(document.getElementById("refRatingWord")) refRatingWord.classList.add("hidden");
+ competition.selectedIndex=0;
+ referee.selectedIndex=0;
+ watchPlace.selectedIndex=0;
+ editingMatchId=null;
+ if(document.getElementById("saveMatchButton")) saveMatchButton.textContent="Enregistrer le match";
+ toggleStadium();
+ fillTeams();
+}
+function allMatches(){ return [...user().matches, ...user().archives.flatMap(a=>a.matches)]; }
+function avg(arr){ const nums=arr.filter(x=>Number(x)); return nums.length?(nums.reduce((a,b)=>a+Number(b),0)/nums.length).toFixed(1):"—"; }
+function countsBy(items, fn){ const m={}; items.forEach(x=>{ const keys=fn(x); (Array.isArray(keys)?keys:[keys]).filter(Boolean).forEach(k=>m[k]=(m[k]||0)+1); }); return Object.entries(m).sort((a,b)=>b[1]-a[1]); }
+function avgBy(items, keyFn, valFn){ const m={}; items.forEach(x=>{const k=keyFn(x), v=Number(valFn(x)); if(k&&v){m[k]=m[k]||[];m[k].push(v)}}); return Object.entries(m).map(([k,v])=>[k,avg(v),v.length]).sort((a,b)=>Number(b[1])-Number(a[1])); }
+
+
+function renderCompactMatch(m){
+ return `<div class="compact-match">
+  <div class="compact-team">${clubLogo(m.home,true)}</div>
+  <div class="compact-score"><b>${m.homeScore} - ${m.awayScore}</b><small>${m.date||""} • ${m.competition}</small></div>
+  <div class="compact-team right">${clubLogo(m.away,true)}</div>
+  <div class="compact-rating">${matchRatingEmojis[Number(m.rating)]||"⭐"}</div>
+ </div>`;
+}
+
+function renderMatch(m){
+ return `<div class="card match-card"><div style="padding:16px">
+ <span class="league-pill">${m.competition}</span>
+ <div class="scoreboard">
+   <div class="team"><div>${m.home}</div></div>
+   <div class="score">${m.homeScore} - ${m.awayScore}</div>
+   <div class="team"><div>${m.away}</div></div>
+ </div>
+ <div class="meta"><span class="badge">⭐ ${m.rating}/10</span><span class="badge">${m.place}</span>${m.stadium?`<span class="badge">🏟️ ${m.stadium}</span>`:""}<span class="badge">👨‍⚖️ ${m.referee||"—"}${m.refRating?` • ${m.refRating}/10`:""}</span></div>
+ ${m.comment?`<p class="muted">${m.comment}</p>`:""}
+ <div class="actions"><button class="secondary" onclick="editMatch(${m.id})">Modifier</button><button class="danger" onclick="deleteMatch(${m.id})">Supprimer</button></div>
+ </div></div>`;
+}
+
+function render(){
+ const u=user(); if(!u)return;
+ hello.textContent="Carnet personnel de matchs";
+ pFirst.textContent=u.first||"—"; pPseudo.textContent=u.pseudo||"—";
+ const season=u.matches, career=allMatches();
+ seasonCount.textContent=season.length; careerCount.textContent=career.length;
+ tvCount.textContent=career.filter(m=>m.place==="📺 Télévision").length;
+ stadiumCount.textContent=career.filter(m=>m.place==="🏟️ Stade").length;
+ const seasonTickets=season.reduce((sum,m)=>sum+(Number(m.ticket)||0),0);
+ if(document.getElementById("ticketSeason")) ticketSeason.textContent=seasonTickets.toFixed(0)+"€";
+ archiveCount.textContent=season.length; if(document.getElementById("archiveTickets")) archiveTickets.textContent=seasonTickets.toFixed(0)+"€";
+ lastMatch.innerHTML=season.length?season.slice(0,3).map(renderCompactMatch).join(""):"Aucun match enregistré.";
+ matchList.innerHTML=season.length?season.map(renderMatch).join(""):`<div class="card empty">Aucun match cette saison.</div>`;
+ renderStats(season, career, seasonTickets);
+ 
+ archivesList.innerHTML=u.archives.length?u.archives.map((a,i)=>`<div class="card"><h3>🏆 ${a.name}</h3><p>${a.matches.length} matchs • ⭐ ${avg(a.matches.map(m=>m.rating))}/10</p><button class="secondary" onclick="unarchive(${i})">Désarchiver</button></div>`).join(""):`<div class="card empty">Aucune saison archivée.</div>`;
+}
+
+function renderSupporterCard(items, seasonTickets){
+ const topTeam=countsBy(items,m=>[m.home,m.away])[0];
+ const topComp=countsBy(items,m=>m.competition)[0];
+ const stadiumMatches=items.filter(m=>m.place==="🏟️ Stade").length;
+ supporterCard.innerHTML=`
+  <div class="rank"><div class="rank-left">Matchs vus</div><b>${items.length}</b></div>
+  <div class="rank"><div class="rank-left">Au stade</div><b>${stadiumMatches}</b></div>
+  <div class="rank"><div class="rank-left">Dépenses billets saison</div><b>${seasonTickets.toFixed(0)}€</b></div>
+  <div class="rank"><div class="rank-left">Club le plus vu</div><b>${topTeam?topTeam[0]:"—"}</b></div>
+  <div class="rank"><div class="rank-left">Championnat le plus vu</div><b>${topComp?topComp[0]:"—"}</b></div>
+  <div class="rank"><div class="rank-left">Note moyenne</div><b>${avg(items.map(m=>m.rating))}/10</b></div>`;
+}
+
+function renderExpensiveTicket(items){
+ const withTickets=items.filter(m=>Number(m.ticket)>0).sort((a,b)=>Number(b.ticket)-Number(a.ticket));
+ if(!withTickets.length){ expensiveTicket.innerHTML='<p class="muted">Aucun billet renseigné.</p>'; return; }
+ const m=withTickets[0];
+ expensiveTicket.innerHTML=`<div class="rank"><div><b>${m.home} ${m.homeScore} - ${m.awayScore} ${m.away}</b><br><span class="muted">${m.competition} • ${m.date||""}</span></div><b>${Number(m.ticket).toFixed(0)}€</b></div>`;
+}
+
+
+function setStatsMode(mode){
+ statsMode=mode;
+ if(document.getElementById("statsSeasonBtn")) statsSeasonBtn.classList.toggle("active",mode==="season");
+ if(document.getElementById("statsCareerBtn")) statsCareerBtn.classList.toggle("active",mode==="career");
+ render();
+}
+
+function sumTickets(items){
+ return items.reduce((sum,m)=>sum+(Number(m.ticket)||0),0);
+}
+
+function renderStats(season, career, seasonTickets){
+ const items=statsMode==="season"?season:career;
+ const tickets=statsMode==="season"?seasonTickets:sumTickets(career);
+ if(document.getElementById("statsSeasonBtn")) statsSeasonBtn.classList.toggle("active",statsMode==="season");
+ if(document.getElementById("statsCareerBtn")) statsCareerBtn.classList.toggle("active",statsMode==="career");
+ if(document.getElementById("sTotalLabel")) sTotalLabel.textContent=statsMode==="season"?"Matchs vus saison":"Matchs vus carrière";
+ if(document.getElementById("sTicketsLabel")) sTicketsLabel.textContent=statsMode==="season"?"Dépenses billets saison":"Dépenses billets totales";
+
+ sTotal.textContent=items.length;
+ sAvg.textContent=avg(items.map(m=>m.rating));
+ sTv.textContent=items.filter(m=>m.place==="📺 Télévision").length;
+ sStadium.textContent=items.filter(m=>m.place==="🏟️ Stade").length;
+ if(document.getElementById("sTickets")) sTickets.textContent=tickets.toFixed(0)+"€";
+
+ renderSupporterCard(items, tickets);
+ renderExpensiveTicket(items);
+ renderTopTeams(items);
+ renderTopCompetitions(items);
+ renderTopRefs(items);
+ renderBest(statsMode==="season"?season:items);
+}
+
+function renderSupporterCard(items, tickets){
+ const topTeam=countsBy(items,m=>[m.home,m.away])[0];
+ const topComp=countsBy(items,m=>m.competition)[0];
+ const stadiumMatches=items.filter(m=>m.place==="🏟️ Stade").length;
+ if(!document.getElementById("supporterCard")) return;
+ supporterCard.innerHTML=`
+  <div class="rank"><div class="rank-left">Matchs vus</div><b>${items.length}</b></div>
+  <div class="rank"><div class="rank-left">Au stade</div><b>${stadiumMatches}</b></div>
+  <div class="rank"><div class="rank-left">Dépenses billets</div><b>${tickets.toFixed(0)}€</b></div>
+  <div class="rank"><div class="rank-left">Club le plus vu</div><b>${topTeam?topTeam[0]:"—"}</b></div>
+  <div class="rank"><div class="rank-left">Championnat le plus vu</div><b>${topComp?topComp[0]:"—"}</b></div>
+  <div class="rank"><div class="rank-left">Note moyenne</div><b>${avg(items.map(m=>m.rating))}/10</b></div>`;
+}
+
+function renderExpensiveTicket(items){
+ if(!document.getElementById("expensiveTicket")) return;
+ const withTickets=items.filter(m=>Number(m.ticket)>0).sort((a,b)=>Number(b.ticket)-Number(a.ticket));
+ if(!withTickets.length){ expensiveTicket.innerHTML='<p class="muted">Aucun billet renseigné.</p>'; return; }
+ const m=withTickets[0];
+ expensiveTicket.innerHTML=`<div class="rank"><div><b>${m.home} ${m.homeScore} - ${m.awayScore} ${m.away}</b><br><span class="muted">${m.competition} • ${m.date||""}</span></div><b>${Number(m.ticket).toFixed(0)}€</b></div>`;
+}
+
+
+function renderTopTeams(matches){ const top=countsBy(matches,m=>[m.home,m.away]).slice(0,3); topTeams.innerHTML=top.length?top.map((x,i)=>`<div class="rank"><div class="rank-left">${i+1}. ${clubLogo(x[0],true)}</div><b>${x[1]}</b></div>`).join(""):`<p class="muted">Pas encore de données.</p>`; }
+function renderTopCompetitions(matches){ const top=countsBy(matches,m=>m.competition).slice(0,3); topCompetitions.innerHTML=top.length?top.map((x,i)=>`<div class="rank"><div class="rank-left">${i+1}. ${x[0]}</div><b>${x[1]}</b></div>`).join(""):`<p class="muted">Pas encore de données.</p>`; }
+function renderTopRefs(matches){ const top=avgBy(matches.filter(m=>m.referee&&m.referee!=="Non renseigné"),m=>m.referee,m=>m.refRating).slice(0,5); topRefs.innerHTML=top.length?top.map((x,i)=>`<div class="rank"><div class="rank-left">${i+1}. ${x[0]}</div><b>${x[1]}/10</b></div>`).join(""):`<p class="muted">Ajoutez une note arbitre pour créer le classement.</p>`; }
+function renderBest(matches){ if(!matches.length){bestMatch.innerHTML='<p class="muted">Aucun match cette saison.</p>';return} const b=[...matches].sort((a,b)=>b.rating-a.rating)[0]; bestMatch.innerHTML=renderMatch(b); }
+
+
+function setSelectValueOrManual(selectEl,value){
+ const exists=[...selectEl.options].some(o=>o.value===value);
+ if(exists){ selectEl.value=value; return; }
+ const manual=[...selectEl.options].find(o=>o.value==="manual");
+ if(manual){ selectEl.value="manual"; return; }
+}
+
+function editMatch(id){
+ const m=user().matches.find(x=>x.id===id);
+ if(!m) return toast("Match introuvable.");
+ editingMatchId=id;
+
+ const compExists=[...competition.options].some(o=>o.value===m.competition);
+ competition.value=compExists?m.competition:"manual";
+ fillTeams();
+
+ setSelectValueOrManual(homeTeam,m.home);
+ setSelectValueOrManual(awayTeam,m.away);
+
+ homeScore.value=m.homeScore||"";
+ awayScore.value=m.awayScore||"";
+ motm.value=m.motm||"";
+ watchPlayer.value=m.watchPlayer||"";
+ referee.value=m.referee||"Non renseigné";
+ watchPlace.value=m.place||"📺 Télévision";
+ toggleStadium();
+ stadiumName.value=m.stadium||"";
+ ticketPrice.value=m.ticket||"";
+ withPeople.value=m.people||"";
+ comment.value=m.comment||"";
+
+ selectedRating=Number(m.rating);
+ [...noteGrid.children].forEach((b,i)=>b.classList.toggle("active",i+1===selectedRating)); matchRatingWord.classList.remove("hidden"); matchRatingWord.innerHTML=`<span>${matchRatingEmojis[selectedRating]} ${selectedRating}/10</span><small>${ratingText(selectedRating)}</small>`;
+
+ selectedRefRating=m.refRating?Number(m.refRating):null;
+ [...refNoteGrid.children].forEach((b,i)=>b.classList.toggle("active",selectedRefRating!==null && i+1===selectedRefRating)); if(selectedRefRating!==null){refRatingWord.classList.remove("hidden"); refRatingWord.innerHTML=`<span>${refRatingEmojis[selectedRefRating]} ${selectedRefRating}/10</span><small>${ratingText(selectedRefRating,"ref")}</small>`;} else {refRatingWord.classList.add("hidden");}
+
+ if(document.getElementById("saveMatchButton")) saveMatchButton.textContent="Enregistrer les modifications";
+ go("add");
+ toast("Modification du match.");
+}
+
+function deleteMatch(id){
+ if(!confirm("Supprimer ce match ?")) return;
+ user().matches=user().matches.filter(m=>m.id!==id);
+ save();
+ render();
+ toast("Match supprimé.");
+}
+
+function archiveSeason(){
+ const u=user(); if(!u.matches.length)return toast("Aucun match à archiver.");
+ const name=prompt("Nom de la saison à archiver :", "Saison "+new Date().getFullYear()+"-"+(new Date().getFullYear()+1));
+ if(!name)return;
+ u.archives.unshift({name,createdAt:new Date().toISOString(),matches:[...u.matches]});
+ u.matches=[]; save(); render(); go("home"); toast("Saison archivée. La saison repart à zéro.");
+}
+function unarchive(i){ const u=user(); const a=u.archives.splice(i,1)[0]; u.matches=[...a.matches,...u.matches]; save(); render(); toast("Saison désarchivée."); go("matches"); }
+function go(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("hidden",s.id!==id)); document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active")); const idx={home:0,matches:1,stats:2,archives:3,profile:4}[id]; if(idx!==undefined)document.querySelectorAll(".tab")[idx].classList.add("active"); render(); window.scrollTo(0,0); }
+
+function boot(){
+ const email="local-user@cahier-matchs.app";
+ if(!state.users[email]){
+   state.users[email]={first:"Supporter",pseudo:"",email,matches:[],archives:[]};
+ }
+ state.current=email;
+ save();
+ auth.classList.add("hidden");
+ app.classList.remove("hidden");
+ initForm();
+ render();
+ go("home");
+}
+
+function exportData(){
+ const data=JSON.stringify(user(),null,2);
+ const blob=new Blob([data],{type:"application/json"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="cahier-des-matchs-sauvegarde.json";
+ a.click();
+ URL.revokeObjectURL(url);
+ toast("Sauvegarde exportée.");
+}
+
+function importData(){
+ const input=document.createElement("input");
+ input.type="file";
+ input.accept="application/json";
+ input.onchange=()=>{
+   const file=input.files[0];
+   if(!file) return;
+   const reader=new FileReader();
+   reader.onload=()=>{
+     try{
+       const imported=JSON.parse(reader.result);
+       if(!imported.matches || !imported.archives) throw new Error("Format invalide");
+       state.users[state.current]={...user(),...imported};
+       save();
+       render();
+       toast("Données importées.");
+     }catch(e){
+       toast("Fichier invalide.");
+     }
+   };
+   reader.readAsText(file);
+ };
+ input.click();
+}
+
+
+load(); boot();
+</script>
+</body>
+</html>
+
+<style>.shirt{display:none!important}</style>
