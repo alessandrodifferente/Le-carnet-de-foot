@@ -476,22 +476,31 @@ body{
 </style>
 
 
-<link rel="icon" href="./favicon.ico">
-<link rel="apple-touch-icon" href="./assets/logo-192.png">
-<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/x-icon" href="./favicon.ico?v=3">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=3">
+<link rel="manifest" href="./manifest.webmanifest?v=3">
 <meta name="theme-color" content="#06110b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Cahier Matchs">
-<style id="official-logo-style">
-.logo{
-  background-image:url("./assets/logo-app.png") !important;
-  background-size:cover !important;
-  background-position:center !important;
-  color:transparent !important;
-  overflow:hidden;
+<style id="official-logo-final">
+.logo.logo-img{
+  background:none!important;
+  background-image:none!important;
+  padding:0!important;
+  overflow:hidden!important;
+  display:grid!important;
+  place-items:center!important;
 }
-.logo::before,.logo::after{display:none!important}
+.logo.logo-img img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  display:block!important;
+  border-radius:inherit!important;
+}
+.logo.logo-img::before,
+.logo.logo-img::after{display:none!important;content:none!important}
 </style>
 
 </head>
@@ -538,7 +547,7 @@ body{
 <main id="app" class="app hidden">
   <div class="topbar">
     <div class="logo-wrap">
-      <div class="logo"></div>
+      <div class="logo logo-img"><img src="./assets/logo-app.png?v=3" alt="Le Cahier des Matchs"></div>
       <div>
         <h1>Le Cahier des Matchs</h1>
         <div class="subtitle" id="hello">Carnet personnel de matchs</div>

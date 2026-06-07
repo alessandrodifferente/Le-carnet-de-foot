@@ -1,25 +1,15 @@
-# Le Cahier des Matchs — GitHub Pages
+# Le Cahier des Matchs — version logo corrigé
 
-Version Option A : sans compte, données stockées localement dans le navigateur.
+À uploader à la racine GitHub Pages.
 
-## Fichiers à envoyer sur GitHub
-
-- `index.html`
-- `manifest.json`
-- `favicon.ico`
-- dossier `assets/`
-
-## Mise en ligne
-
-1. Va sur ton dépôt GitHub.
-2. Clique `Add file` puis `Upload files`.
-3. Glisse tous les fichiers et le dossier `assets`.
-4. Clique `Commit changes`.
-5. GitHub Pages mettra le site à jour en 1 à 3 minutes.
-
-## Icône téléphone
-
-Le logo est intégré pour :
-- favicon navigateur ;
-- icône Android ;
-- icône iPhone via “Ajouter à l’écran d’accueil”.
+Important :
+- Supprime l’ancienne icône de ton écran d’accueil avant de tester.
+- Upload aussi les nouveaux fichiers à la racine :
+  - apple-touch-icon.png
+  - icon-192.png
+  - icon-512.png
+  - favicon.ico
+  - manifest.webmanifest
+  - manifest.json
+  - dossier assets
+  - index.html
