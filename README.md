@@ -1,15 +1,13 @@
-# Le Cahier des Matchs — version logo corrigé
+# Le Cahier des Matchs — version finale
 
-À uploader à la racine GitHub Pages.
+Modifs :
+- Logo cliquable : retour accueil.
+- Date du match ajoutée et modifiable.
+- Stats saison et carrière séparées :
+  - matchs vus
+  - TV
+  - stade
+  - dépenses billets
+- Icônes PWA conservées.
 
-Important :
-- Supprime l’ancienne icône de ton écran d’accueil avant de tester.
-- Upload aussi les nouveaux fichiers à la racine :
-  - apple-touch-icon.png
-  - icon-192.png
-  - icon-512.png
-  - favicon.ico
-  - manifest.webmanifest
-  - manifest.json
-  - dossier assets
-  - index.html
+À envoyer à la racine GitHub Pages.
