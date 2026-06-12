@@ -35,6 +35,7 @@ input,select,textarea{width:100%;background:#09160f;color:var(--text);border:1px
 select:disabled{opacity:.55;color:#6f8376}
 select:disabled{opacity:.55;color:#6f8376}#manualCompetition{margin-top:10px}
 select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
+#manualReferee{margin-top:10px}
 </style>
 
 <style id="accordion-stats-style">
@@ -231,11 +232,6 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
 </style>
 
 
-<style id="manual-referee-visible-style">
-#manualReferee{margin-top:10px}
-</style>
-
-
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="icon" href="./favicon.ico">
@@ -285,7 +281,7 @@ if ("serviceWorker" in navigator) {
     <label>Note du match</label><div id="noteGrid" class="note-grid"></div>
     <label>Homme du match</label><input id="motm" placeholder="Nom du joueur">
     <label>Joueur à suivre</label><input id="watchPlayer" placeholder="Nom du joueur">
-    <label>Arbitre</label><select id="referee"></select>
+    <label>Arbitre</label><select id="referee" onchange="toggleManualReferee()"></select><input id="manualReferee" class="hidden manual-field" placeholder="Nom de l’arbitre">
     <label>Note arbitre</label><div id="refNoteGrid" class="note-grid"></div>
     <label>Où avez-vous regardé ?</label><select id="watchPlace" onchange="toggleStadium()"><option>📺 Télévision</option><option>🏟️ Stade</option></select>
     <div id="stadiumFields" class="hidden">
@@ -410,6 +406,14 @@ function setRating(n){ selectedRating=n; [...noteGrid.children].forEach((b,i)=>b
 function setRefRating(n){ selectedRefRating=n; [...refNoteGrid.children].forEach((b,i)=>b.classList.toggle("active",i+1===n)); }
 function toggleStadium(){ stadiumFields.classList.toggle("hidden",watchPlace.value!=="🏟️ Stade"); }
 
+
+function toggleManualReferee(){
+ const el=document.getElementById("manualReferee");
+ if(!el || !document.getElementById("referee")) return;
+ el.classList.toggle("hidden", referee.value!=="manual");
+ if(referee.value==="manual") el.focus();
+}
+
 function saveMatch(){
  let comp=competition.value; if(comp==="manual") comp=(manualCompetition.value.trim()||"");
  let home=homeTeam.value, away=awayTeam.value;
@@ -417,11 +421,11 @@ function saveMatch(){
  if(away==="manual"||!away) away=(document.getElementById("manualAwayTeam")?manualAwayTeam.value.trim():"") || prompt("Équipe extérieure") || "";
  if(!comp||!home||!away) return toast("Indiquez championnat et équipes.");
  if(selectedRating===null) return toast("Choisissez une note.");
- const m={id:editingMatchId||Date.now(),date:isoToFr(matchDate.value||todayISO()),dateISO:matchDate.value||todayISO(),competition:comp,home,away,homeScore:homeScore.value||"0",awayScore:awayScore.value||"0",rating:selectedRating,motm:motm.value.trim(),watchPlayer:watchPlayer.value.trim(),referee:(referee.value==="manual"?(prompt("Nom de l’arbitre :")||"Non renseigné"):referee.value),refRating:selectedRefRating,place:watchPlace.value,stadium:stadiumName.value.trim(),ticket:ticketPrice.value,people:withPeople.value.trim(),comment:comment.value.trim()};
+ const m={id:editingMatchId||Date.now(),date:isoToFr(matchDate.value||todayISO()),dateISO:matchDate.value||todayISO(),competition:comp,home,away,homeScore:homeScore.value||"0",awayScore:awayScore.value||"0",rating:selectedRating,motm:motm.value.trim(),watchPlayer:watchPlayer.value.trim(),referee:(referee.value==="manual"?((document.getElementById("manualReferee")&&manualReferee.value.trim())||"Arbitre personnalisé"):referee.value),refRating:selectedRefRating,place:watchPlace.value,stadium:stadiumName.value.trim(),ticket:ticketPrice.value,people:withPeople.value.trim(),comment:comment.value.trim()};
  if(editingMatchId){ data.matches=data.matches.map(x=>String(x.id)===String(editingMatchId)?m:x); toast("Match modifié."); } else { data.matches.unshift(m); toast("Match enregistré."); }
  save(); editingMatchId=null; resetForm(); render(); go("home");
 }
-function resetForm(){ document.querySelectorAll("#add input,#add textarea").forEach(x=>x.value=""); ["manualCompetition","manualHomeTeam","manualAwayTeam"].forEach(id=>{const el=document.getElementById(id); if(el) el.classList.add("hidden");}); matchDate.value=todayISO(); selectedRating=null; selectedRefRating=null; [...noteGrid.children,...refNoteGrid.children].forEach(b=>b.classList.remove("active")); competition.selectedIndex=0; fillTeams(); referee.selectedIndex=0; watchPlace.selectedIndex=0; toggleStadium(); saveMatchButton.textContent="Enregistrer le match"; formTitle.textContent="Ajouter un match"; }
+function resetForm(){ document.querySelectorAll("#add input,#add textarea").forEach(x=>x.value=""); ["manualCompetition","manualHomeTeam","manualAwayTeam","manualReferee"].forEach(id=>{const el=document.getElementById(id); if(el){ el.classList.add("hidden"); if(id==="manualReferee") el.value=""; }}); matchDate.value=todayISO(); selectedRating=null; selectedRefRating=null; [...noteGrid.children,...refNoteGrid.children].forEach(b=>b.classList.remove("active")); competition.selectedIndex=0; fillTeams(); referee.selectedIndex=0; watchPlace.selectedIndex=0; toggleStadium(); saveMatchButton.textContent="Enregistrer le match"; formTitle.textContent="Ajouter un match"; }
 
 function renderMatch(m){
  return `<div class="card match-card" data-match-id="${m.id}">
@@ -1850,71 +1854,6 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       if(typeof render==="function") render();
     }
   }catch(e){}
-})();
-</script>
-
-
-<script id="manual-referee-visible-patch">
-(function(){
-  function ensureManualRefereeField(){
-    const refereeSelect = document.getElementById("referee");
-    if(!refereeSelect) return;
-
-    if(!document.getElementById("manualReferee")){
-      refereeSelect.insertAdjacentHTML("afterend", '<input id="manualReferee" class="hidden manual-field" placeholder="Nom de l’arbitre">');
-    }
-
-    refereeSelect.onchange = function(){
-      const manual = document.getElementById("manualReferee");
-      if(!manual) return;
-      manual.classList.toggle("hidden", refereeSelect.value !== "manual");
-      if(refereeSelect.value === "manual") manual.focus();
-    };
-  }
-
-  const oldSaveMatch = window.saveMatch;
-  if(typeof oldSaveMatch === "function"){
-    window.saveMatch = function(){
-      const refereeSelect = document.getElementById("referee");
-      const manual = document.getElementById("manualReferee");
-
-      if(refereeSelect && refereeSelect.value === "manual"){
-        const name = manual && manual.value.trim() ? manual.value.trim() : "Arbitre personnalisé";
-        let opt = Array.from(refereeSelect.options).find(o => o.value === name);
-        if(!opt){
-          opt = document.createElement("option");
-          opt.value = name;
-          opt.textContent = name;
-          refereeSelect.appendChild(opt);
-        }
-        refereeSelect.value = name;
-      }
-
-      oldSaveMatch();
-    };
-  }
-
-  const oldInitForm = window.initForm;
-  if(typeof oldInitForm === "function"){
-    window.initForm = function(){
-      oldInitForm();
-      ensureManualRefereeField();
-    };
-  }
-
-  const oldResetForm = window.resetForm;
-  if(typeof oldResetForm === "function"){
-    window.resetForm = function(){
-      oldResetForm();
-      const manual = document.getElementById("manualReferee");
-      if(manual){
-        manual.value = "";
-        manual.classList.add("hidden");
-      }
-    };
-  }
-
-  setTimeout(ensureManualRefereeField,100);
 })();
 </script>
 
