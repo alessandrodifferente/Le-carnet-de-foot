@@ -1943,5 +1943,79 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
 })();
 </script>
 
+
+<script id="note-toggle-hard-fix">
+(function(){
+  function clearMatchRating(){
+    if(typeof selectedRating !== "undefined") selectedRating = null;
+    window.selectedRating = null;
+    document.querySelectorAll("#noteGrid .note-btn").forEach(b => b.classList.remove("active"));
+    const d = document.getElementById("matchRatingDisplay");
+    if(d){ d.classList.add("hidden"); d.innerHTML = ""; }
+  }
+
+  function clearRefRating(){
+    if(typeof selectedRefRating !== "undefined") selectedRefRating = null;
+    window.selectedRefRating = null;
+    document.querySelectorAll("#refNoteGrid .note-btn").forEach(b => b.classList.remove("active"));
+    const d = document.getElementById("refRatingDisplay");
+    if(d){ d.classList.add("hidden"); d.innerHTML = ""; }
+  }
+
+  function getNoteFromButton(btn){
+    if(btn.dataset.matchNote) return Number(btn.dataset.matchNote);
+    if(btn.dataset.refNote) return Number(btn.dataset.refNote);
+
+    const onclick = btn.getAttribute("onclick") || "";
+    let m = onclick.match(/setRating\((\d+)\)/);
+    if(m) return Number(m[1]);
+
+    m = onclick.match(/setRefRating\((\d+)\)/);
+    if(m) return Number(m[1]);
+
+    const small = btn.querySelector("small");
+    if(small && /^\d+$/.test(small.textContent.trim())) return Number(small.textContent.trim());
+
+    const text = btn.textContent.trim().match(/\b(10|[1-9])\b/);
+    return text ? Number(text[1]) : null;
+  }
+
+  function maybeClear(e){
+    const btn = e.target.closest && e.target.closest(".note-btn");
+    if(!btn) return;
+
+    const inMatchGrid = btn.closest("#noteGrid");
+    const inRefGrid = btn.closest("#refNoteGrid");
+    if(!inMatchGrid && !inRefGrid) return;
+
+    const note = getNoteFromButton(btn);
+    if(!note) return;
+
+    if(inMatchGrid){
+      const current = (typeof selectedRating !== "undefined" ? selectedRating : window.selectedRating);
+      if(Number(current) === Number(note) || btn.classList.contains("active")){
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        clearMatchRating();
+      }
+    }
+
+    if(inRefGrid){
+      const current = (typeof selectedRefRating !== "undefined" ? selectedRefRating : window.selectedRefRating);
+      if(Number(current) === Number(note) || btn.classList.contains("active")){
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        clearRefRating();
+      }
+    }
+  }
+
+  document.addEventListener("click", maybeClear, true);
+  document.addEventListener("touchend", maybeClear, true);
+})();
+</script>
+
 </body>
 </html>
