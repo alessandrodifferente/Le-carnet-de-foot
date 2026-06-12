@@ -410,20 +410,23 @@ function toggleManualTeamInputs(){
  if(document.getElementById("manualHomeTeam")) manualHomeTeam.classList.toggle("hidden",homeTeam.value!=="manual");
  if(document.getElementById("manualAwayTeam")) manualAwayTeam.classList.toggle("hidden",awayTeam.value!=="manual");
 }
-function setRating(n){ selectedRating=n; [...noteGrid.children].forEach((b,i)=>b.classList.toggle("active",i+1===n)); }
-function setRefRating(n){ selectedRefRating=n; [...refNoteGrid.children].forEach((b,i)=>b.classList.toggle("active",i+1===n)); }
-function toggleStadium(){ stadiumFields.classList.toggle("hidden",watchPlace.value!=="🏟️ Stade"); }
-
-function saveMatch(){
- let comp=competition.value; if(comp==="manual") comp=(manualCompetition.value.trim()||"");
- let home=homeTeam.value, away=awayTeam.value;
- if(home==="manual"||!home) home=(document.getElementById("manualHomeTeam")?manualHomeTeam.value.trim():"") || prompt("Équipe domicile") || "";
- if(away==="manual"||!away) away=(document.getElementById("manualAwayTeam")?manualAwayTeam.value.trim():"") || prompt("Équipe extérieure") || "";
- if(!comp||!home||!away) return toast("Indiquez championnat et équipes.");
- if(selectedRating===null) return toast("Choisissez une note.");
- const m={id:editingMatchId||Date.now(),date:isoToFr(matchDate.value||todayISO()),dateISO:matchDate.value||todayISO(),competition:comp,home,away,homeScore:homeScore.value||"0",awayScore:awayScore.value||"0",rating:selectedRating,motm:motm.value.trim(),watchPlayer:watchPlayer.value.trim(),referee:(referee.value==="manual"?(prompt("Nom de l’arbitre :")||"Non renseigné"):referee.value),refRating:selectedRefRating,place:watchPlace.value,stadium:stadiumName.value.trim(),ticket:ticketPrice.value,people:withPeople.value.trim(),comment:comment.value.trim()};
- if(editingMatchId){ data.matches=data.matches.map(x=>String(x.id)===String(editingMatchId)?m:x); toast("Match modifié."); } else { data.matches.unshift(m); toast("Match enregistré."); }
- save(); editingMatchId=null; resetForm(); render(); go("home");
+function setRating(n){
+ if(selectedRating===n){
+   selectedRating=null;
+   if(typeof window!=="undefined") window.selectedRating=null;
+   [...noteGrid.children].forEach(b=>b.classList.remove("active"));
+   const d=document.getElementById("matchRatingDisplay");
+   if(d){d.classList.add("hidden");d.innerHTML="";}
+   return;
+ }
+ selectedRating=n;
+ if(typeof window!=="undefined") window.selectedRating=n;
+ [...noteGrid.children].forEach((b,i)=>b.classList.toggle("active",i+1===n));
+ const d=document.getElementById("matchRatingDisplay");
+ if(d && typeof matchEmojis!=="undefined" && typeof matchLabels!=="undefined"){
+   d.classList.remove("hidden");
+   d.innerHTML=`<span>${matchEmojis[n]||"⭐"}</span><strong>${n}/10</strong><em>${matchLabels[n]||""}</em>`;
+ }
 }
 function resetForm(){ document.querySelectorAll("#add input,#add textarea").forEach(x=>x.value=""); ["manualCompetition","manualHomeTeam","manualAwayTeam"].forEach(id=>{const el=document.getElementById(id); if(el) el.classList.add("hidden");}); matchDate.value=todayISO(); selectedRating=null; selectedRefRating=null; [...noteGrid.children,...refNoteGrid.children].forEach(b=>b.classList.remove("active")); competition.selectedIndex=0; fillTeams(); referee.selectedIndex=0; watchPlace.selectedIndex=0; toggleStadium(); saveMatchButton.textContent="Enregistrer le match"; formTitle.textContent="Ajouter un match"; }
 
@@ -1944,73 +1947,26 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
 </script>
 
 
-<script id="rating-toggle-safe-fix">
+
+
+
+<script id="rating-display-boxes-final">
 (function(){
-  function clearMatchRating(){
-    try{
-      if(typeof selectedRating !== "undefined") selectedRating = null;
-      window.selectedRating = null;
-      document.querySelectorAll("#noteGrid .note-btn").forEach(b => b.classList.remove("active"));
-      const d = document.getElementById("matchRatingDisplay");
-      if(d){ d.classList.add("hidden"); d.innerHTML = ""; }
-    }catch(e){}
-  }
-
-  function clearRefRating(){
-    try{
-      if(typeof selectedRefRating !== "undefined") selectedRefRating = null;
-      window.selectedRefRating = null;
-      document.querySelectorAll("#refNoteGrid .note-btn").forEach(b => b.classList.remove("active"));
-      const d = document.getElementById("refRatingDisplay");
-      if(d){ d.classList.add("hidden"); d.innerHTML = ""; }
-    }catch(e){}
-  }
-
-  function getCurrentMatchRating(){
-    try{
-      if(typeof selectedRating !== "undefined") return selectedRating;
-      return window.selectedRating;
-    }catch(e){ return window.selectedRating; }
-  }
-
-  function getCurrentRefRating(){
-    try{
-      if(typeof selectedRefRating !== "undefined") return selectedRefRating;
-      return window.selectedRefRating;
-    }catch(e){ return window.selectedRefRating; }
-  }
-
-  const originalSetRating = window.setRating;
-  window.setRating = function(n){
-    const current = getCurrentMatchRating();
-    if(Number(current) === Number(n)){
-      clearMatchRating();
-      return;
-    }
-    if(typeof originalSetRating === "function"){
-      originalSetRating(n);
-    }else{
-      if(typeof selectedRating !== "undefined") selectedRating = n;
-      window.selectedRating = n;
-      document.querySelectorAll("#noteGrid .note-btn").forEach((b,i)=>b.classList.toggle("active", i+1 === Number(n)));
-    }
-  };
-
-  const originalSetRefRating = window.setRefRating;
-  window.setRefRating = function(n){
-    const current = getCurrentRefRating();
-    if(Number(current) === Number(n)){
-      clearRefRating();
-      return;
-    }
-    if(typeof originalSetRefRating === "function"){
-      originalSetRefRating(n);
-    }else{
-      if(typeof selectedRefRating !== "undefined") selectedRefRating = n;
-      window.selectedRefRating = n;
-      document.querySelectorAll("#refNoteGrid .note-btn").forEach((b,i)=>b.classList.toggle("active", i+1 === Number(n)));
-    }
-  };
+ function ensure(){
+   const ng=document.getElementById("noteGrid");
+   const rg=document.getElementById("refNoteGrid");
+   if(ng && !document.getElementById("matchRatingDisplay")){
+     ng.insertAdjacentHTML("afterend",'<div id="matchRatingDisplay" class="rating-display hidden"></div>');
+   }
+   if(rg && !document.getElementById("refRatingDisplay")){
+     rg.insertAdjacentHTML("afterend",'<div id="refRatingDisplay" class="rating-display hidden"></div>');
+   }
+ }
+ const oldInit=window.initForm;
+ if(typeof oldInit==="function"){
+   window.initForm=function(){oldInit();setTimeout(ensure,20);};
+ }
+ setTimeout(ensure,100);
 })();
 </script>
 
