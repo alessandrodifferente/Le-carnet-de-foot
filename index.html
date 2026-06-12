@@ -4,10 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Le Cahier des Matchs — Production propre</title>
-<link rel="icon" href="./favicon.ico">
-<link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<link rel="manifest" href="./manifest.webmanifest">
-<meta name="theme-color" content="#06110b">
 <style>
 :root{--bg:#06110b;--card:#102017;--line:rgba(139,255,177,.16);--text:#f6fff8;--muted:#9bb5a6;--green:#00d45f;--green2:#a6ffbf;--danger:#ff6b6b;--shadow:0 22px 70px rgba(0,0,0,.38)}
 *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 80% -10%,rgba(0,212,95,.22),transparent 28%),linear-gradient(180deg,#06160d,#030805 75%);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
@@ -233,6 +229,22 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
   font-size:13px;
 }
 </style>
+
+
+<style id="manual-referee-visible-style">
+#manualReferee{margin-top:10px}
+</style>
+
+
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="icon" href="./favicon.ico">
+<meta name="theme-color" content="#06110b">
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));
+}
+</script>
 
 </head>
 <body>
@@ -1838,6 +1850,71 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       if(typeof render==="function") render();
     }
   }catch(e){}
+})();
+</script>
+
+
+<script id="manual-referee-visible-patch">
+(function(){
+  function ensureManualRefereeField(){
+    const refereeSelect = document.getElementById("referee");
+    if(!refereeSelect) return;
+
+    if(!document.getElementById("manualReferee")){
+      refereeSelect.insertAdjacentHTML("afterend", '<input id="manualReferee" class="hidden manual-field" placeholder="Nom de l’arbitre">');
+    }
+
+    refereeSelect.onchange = function(){
+      const manual = document.getElementById("manualReferee");
+      if(!manual) return;
+      manual.classList.toggle("hidden", refereeSelect.value !== "manual");
+      if(refereeSelect.value === "manual") manual.focus();
+    };
+  }
+
+  const oldSaveMatch = window.saveMatch;
+  if(typeof oldSaveMatch === "function"){
+    window.saveMatch = function(){
+      const refereeSelect = document.getElementById("referee");
+      const manual = document.getElementById("manualReferee");
+
+      if(refereeSelect && refereeSelect.value === "manual"){
+        const name = manual && manual.value.trim() ? manual.value.trim() : "Arbitre personnalisé";
+        let opt = Array.from(refereeSelect.options).find(o => o.value === name);
+        if(!opt){
+          opt = document.createElement("option");
+          opt.value = name;
+          opt.textContent = name;
+          refereeSelect.appendChild(opt);
+        }
+        refereeSelect.value = name;
+      }
+
+      oldSaveMatch();
+    };
+  }
+
+  const oldInitForm = window.initForm;
+  if(typeof oldInitForm === "function"){
+    window.initForm = function(){
+      oldInitForm();
+      ensureManualRefereeField();
+    };
+  }
+
+  const oldResetForm = window.resetForm;
+  if(typeof oldResetForm === "function"){
+    window.resetForm = function(){
+      oldResetForm();
+      const manual = document.getElementById("manualReferee");
+      if(manual){
+        manual.value = "";
+        manual.classList.add("hidden");
+      }
+    };
+  }
+
+  setTimeout(ensureManualRefereeField,100);
 })();
 </script>
 
