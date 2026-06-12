@@ -35,7 +35,6 @@ input,select,textarea{width:100%;background:#09160f;color:var(--text);border:1px
 select:disabled{opacity:.55;color:#6f8376}
 select:disabled{opacity:.55;color:#6f8376}#manualCompetition{margin-top:10px}
 select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
-#manualReferee{margin-top:10px}
 </style>
 
 <style id="accordion-stats-style">
@@ -232,6 +231,15 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
 </style>
 
 
+<style id="rating-toggle-final-style">
+#manualReferee{margin-top:10px!important;display:block}
+#manualReferee.hidden{display:none!important}
+.rating-display{margin-top:10px;border:1px solid rgba(166,255,191,.16);background:#07160e;border-radius:16px;padding:12px;display:flex;align-items:center;gap:10px}
+.rating-display.hidden{display:none!important}
+.rating-display span{font-size:26px}.rating-display strong{font-size:16px;color:#f6fff8}.rating-display em{font-style:normal;color:#69f08f;font-weight:900;font-size:13px}
+</style>
+
+
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="icon" href="./favicon.ico">
@@ -281,7 +289,7 @@ if ("serviceWorker" in navigator) {
     <label>Note du match</label><div id="noteGrid" class="note-grid"></div>
     <label>Homme du match</label><input id="motm" placeholder="Nom du joueur">
     <label>Joueur à suivre</label><input id="watchPlayer" placeholder="Nom du joueur">
-    <label>Arbitre</label><select id="referee" onchange="toggleManualReferee()"></select><input id="manualReferee" class="hidden manual-field" placeholder="Nom de l’arbitre">
+    <label>Arbitre</label><select id="referee"></select>
     <label>Note arbitre</label><div id="refNoteGrid" class="note-grid"></div>
     <label>Où avez-vous regardé ?</label><select id="watchPlace" onchange="toggleStadium()"><option>📺 Télévision</option><option>🏟️ Stade</option></select>
     <div id="stadiumFields" class="hidden">
@@ -406,14 +414,6 @@ function setRating(n){ selectedRating=n; [...noteGrid.children].forEach((b,i)=>b
 function setRefRating(n){ selectedRefRating=n; [...refNoteGrid.children].forEach((b,i)=>b.classList.toggle("active",i+1===n)); }
 function toggleStadium(){ stadiumFields.classList.toggle("hidden",watchPlace.value!=="🏟️ Stade"); }
 
-
-function toggleManualReferee(){
- const el=document.getElementById("manualReferee");
- if(!el || !document.getElementById("referee")) return;
- el.classList.toggle("hidden", referee.value!=="manual");
- if(referee.value==="manual") el.focus();
-}
-
 function saveMatch(){
  let comp=competition.value; if(comp==="manual") comp=(manualCompetition.value.trim()||"");
  let home=homeTeam.value, away=awayTeam.value;
@@ -421,11 +421,11 @@ function saveMatch(){
  if(away==="manual"||!away) away=(document.getElementById("manualAwayTeam")?manualAwayTeam.value.trim():"") || prompt("Équipe extérieure") || "";
  if(!comp||!home||!away) return toast("Indiquez championnat et équipes.");
  if(selectedRating===null) return toast("Choisissez une note.");
- const m={id:editingMatchId||Date.now(),date:isoToFr(matchDate.value||todayISO()),dateISO:matchDate.value||todayISO(),competition:comp,home,away,homeScore:homeScore.value||"0",awayScore:awayScore.value||"0",rating:selectedRating,motm:motm.value.trim(),watchPlayer:watchPlayer.value.trim(),referee:(referee.value==="manual"?((document.getElementById("manualReferee")&&manualReferee.value.trim())||"Arbitre personnalisé"):referee.value),refRating:selectedRefRating,place:watchPlace.value,stadium:stadiumName.value.trim(),ticket:ticketPrice.value,people:withPeople.value.trim(),comment:comment.value.trim()};
+ const m={id:editingMatchId||Date.now(),date:isoToFr(matchDate.value||todayISO()),dateISO:matchDate.value||todayISO(),competition:comp,home,away,homeScore:homeScore.value||"0",awayScore:awayScore.value||"0",rating:selectedRating,motm:motm.value.trim(),watchPlayer:watchPlayer.value.trim(),referee:(referee.value==="manual"?(prompt("Nom de l’arbitre :")||"Non renseigné"):referee.value),refRating:selectedRefRating,place:watchPlace.value,stadium:stadiumName.value.trim(),ticket:ticketPrice.value,people:withPeople.value.trim(),comment:comment.value.trim()};
  if(editingMatchId){ data.matches=data.matches.map(x=>String(x.id)===String(editingMatchId)?m:x); toast("Match modifié."); } else { data.matches.unshift(m); toast("Match enregistré."); }
  save(); editingMatchId=null; resetForm(); render(); go("home");
 }
-function resetForm(){ document.querySelectorAll("#add input,#add textarea").forEach(x=>x.value=""); ["manualCompetition","manualHomeTeam","manualAwayTeam","manualReferee"].forEach(id=>{const el=document.getElementById(id); if(el){ el.classList.add("hidden"); if(id==="manualReferee") el.value=""; }}); matchDate.value=todayISO(); selectedRating=null; selectedRefRating=null; [...noteGrid.children,...refNoteGrid.children].forEach(b=>b.classList.remove("active")); competition.selectedIndex=0; fillTeams(); referee.selectedIndex=0; watchPlace.selectedIndex=0; toggleStadium(); saveMatchButton.textContent="Enregistrer le match"; formTitle.textContent="Ajouter un match"; }
+function resetForm(){ document.querySelectorAll("#add input,#add textarea").forEach(x=>x.value=""); ["manualCompetition","manualHomeTeam","manualAwayTeam"].forEach(id=>{const el=document.getElementById(id); if(el) el.classList.add("hidden");}); matchDate.value=todayISO(); selectedRating=null; selectedRefRating=null; [...noteGrid.children,...refNoteGrid.children].forEach(b=>b.classList.remove("active")); competition.selectedIndex=0; fillTeams(); referee.selectedIndex=0; watchPlace.selectedIndex=0; toggleStadium(); saveMatchButton.textContent="Enregistrer le match"; formTitle.textContent="Ajouter un match"; }
 
 function renderMatch(m){
  return `<div class="card match-card" data-match-id="${m.id}">
@@ -1854,6 +1854,92 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       if(typeof render==="function") render();
     }
   }catch(e){}
+})();
+</script>
+
+
+<script id="manual-referee-mobile-rating-toggle-final">
+(function(){
+  function findRefereeSelect(){
+    let s=document.getElementById("referee");
+    if(s) return s;
+    return Array.from(document.querySelectorAll("select")).find(sel=>{
+      const lab=sel.previousElementSibling&&sel.previousElementSibling.tagName==="LABEL"?sel.previousElementSibling.textContent.toLowerCase():"";
+      const par=sel.parentElement?sel.parentElement.textContent.toLowerCase():"";
+      return lab.includes("arbitre")||par.includes("arbitre");
+    })||null;
+  }
+  function isManual(sel){
+    if(!sel) return false;
+    const opt=sel.options[sel.selectedIndex];
+    return sel.value==="manual" || (opt&&opt.textContent.toLowerCase().includes("saisie manuelle"));
+  }
+  function ensureManualRefereeField(){
+    const sel=findRefereeSelect(); if(!sel) return;
+    sel.id="referee";
+    if(!Array.from(sel.options).some(o=>o.value==="manual"||o.textContent.toLowerCase().includes("saisie manuelle"))){
+      const opt=document.createElement("option"); opt.value="manual"; opt.textContent="✍️ Saisie manuelle"; sel.appendChild(opt);
+    }
+    let input=document.getElementById("manualReferee");
+    if(!input){
+      input=document.createElement("input"); input.id="manualReferee"; input.className="hidden manual-field"; input.placeholder="Nom de l’arbitre";
+      sel.insertAdjacentElement("afterend",input);
+    }
+    const show=isManual(sel);
+    input.classList.toggle("hidden",!show);
+    if(show) setTimeout(()=>input.focus(),30);
+    if(!sel.__manualBound){
+      sel.__manualBound=true;
+      ["change","input","click","touchend","blur","focusout","pointerup"].forEach(ev=>sel.addEventListener(ev,()=>setTimeout(ensureManualRefereeField,40),true));
+    }
+  }
+  function normalizeRefBeforeSave(){
+    const sel=findRefereeSelect(), input=document.getElementById("manualReferee"); if(!sel) return;
+    if(isManual(sel)){
+      const name=input&&input.value.trim()?input.value.trim():"Arbitre personnalisé";
+      let opt=Array.from(sel.options).find(o=>o.value===name);
+      if(!opt){ opt=document.createElement("option"); opt.value=name; opt.textContent=name; sel.appendChild(opt); }
+      sel.value=name;
+    }
+  }
+  const oldSave=window.saveMatch;
+  if(typeof oldSave==="function"){ window.saveMatch=function(){ normalizeRefBeforeSave(); return oldSave(); }; }
+
+  function showBox(id,n,emojis,labels){
+    const el=document.getElementById(id); if(!el) return;
+    if(!n){el.classList.add("hidden"); el.innerHTML=""; return;}
+    el.classList.remove("hidden"); el.innerHTML=`<span>${emojis[n]||"⭐"}</span><strong>${n}/10</strong><em>${labels[n]||""}</em>`;
+  }
+  const ME={1:"💀",2:"🥶",3:"😑",4:"😕",5:"😐",6:"👍",7:"🔥",8:"🤩",9:"👑",10:"🐐"};
+  const ML={1:"Une purge absolue",2:"Glacial, aucun plaisir",3:"Sans intérêt",4:"Décevant",5:"Moyen",6:"Bon match",7:"Très bon match",8:"Super spectacle",9:"Match exceptionnel",10:"Match légendaire"};
+  const RE={1:"🚨",2:"🤦",3:"😬",4:"😕",5:"😐",6:"👍",7:"👌",8:"🎯",9:"⭐",10:"👑"};
+  const RL={1:"Catastrophique",2:"Hors sujet",3:"Très mauvais",4:"Beaucoup d'erreurs",5:"Moyen",6:"Correct",7:"Bonne prestation",8:"Décisions justes",9:"Excellent arbitrage",10:"Arbitrage parfait"};
+
+  const oldSetRating=window.setRating;
+  window.setRating=function(n){
+    const same=(typeof selectedRating!=="undefined" && Number(selectedRating)===Number(n)) || Number(window.selectedRating)===Number(n);
+    if(same){ if(typeof selectedRating!=="undefined") selectedRating=null; window.selectedRating=null; document.querySelectorAll("#noteGrid .note-btn").forEach(b=>b.classList.remove("active")); showBox("matchRatingDisplay",null,ME,ML); return; }
+    if(typeof oldSetRating==="function") oldSetRating(n); else { if(typeof selectedRating!=="undefined") selectedRating=n; window.selectedRating=n; }
+    showBox("matchRatingDisplay",Number(n),ME,ML);
+  };
+  const oldSetRef=window.setRefRating;
+  window.setRefRating=function(n){
+    const same=(typeof selectedRefRating!=="undefined" && Number(selectedRefRating)===Number(n)) || Number(window.selectedRefRating)===Number(n);
+    if(same){ if(typeof selectedRefRating!=="undefined") selectedRefRating=null; window.selectedRefRating=null; document.querySelectorAll("#refNoteGrid .note-btn").forEach(b=>b.classList.remove("active")); showBox("refRatingDisplay",null,RE,RL); return; }
+    if(typeof oldSetRef==="function") oldSetRef(n); else { if(typeof selectedRefRating!=="undefined") selectedRefRating=n; window.selectedRefRating=n; }
+    showBox("refRatingDisplay",Number(n),RE,RL);
+  };
+  function prepare(){
+    ensureManualRefereeField();
+    const ng=document.getElementById("noteGrid"), rg=document.getElementById("refNoteGrid");
+    if(ng&&!document.getElementById("matchRatingDisplay")) ng.insertAdjacentHTML("afterend",'<div id="matchRatingDisplay" class="rating-display hidden"></div>');
+    if(rg&&!document.getElementById("refRatingDisplay")) rg.insertAdjacentHTML("afterend",'<div id="refRatingDisplay" class="rating-display hidden"></div>');
+  }
+  const oldInit=window.initForm; if(typeof oldInit==="function"){window.initForm=function(){oldInit();setTimeout(prepare,30);};}
+  const oldReset=window.resetForm; if(typeof oldReset==="function"){window.resetForm=function(){oldReset();setTimeout(()=>{prepare(); const i=document.getElementById("manualReferee"); if(i){i.value="";i.classList.add("hidden");} showBox("matchRatingDisplay",null,ME,ML); showBox("refRatingDisplay",null,RE,RL);},30);};}
+  new MutationObserver(()=>prepare()).observe(document.body,{childList:true,subtree:true});
+  ["touchend","click","change","input","pointerup"].forEach(ev=>document.addEventListener(ev,()=>setTimeout(prepare,40),true));
+  setTimeout(prepare,100); setTimeout(prepare,500); setTimeout(prepare,1200);
 })();
 </script>
 
