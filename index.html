@@ -37,6 +37,7 @@ select:disabled{opacity:.55;color:#6f8376}#manualCompetition{margin-top:10px}
 select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
 </style>
 
+
 <style id="accordion-stats-style">
 .accordion-comp{border:1px solid rgba(166,255,191,.12);border-radius:18px;overflow:hidden;background:rgba(4,14,8,.42);margin:10px 0}
 .accordion-head,.team-head{width:100%;border:0;background:transparent;color:var(--text);display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;font-weight:950}
@@ -52,11 +53,15 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
 </style>
 
 
+
+
 <style id="rating-emoji-style">
 .note-btn{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:2px!important;min-height:52px!important}
 .note-btn span{font-size:20px;line-height:1}
 .note-btn small{font-size:11px;font-weight:950}
 </style>
+
+
 
 
 <style id="match-accordion-stable">
@@ -92,10 +97,14 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
 </style>
 
 
+
+
 <style id="remove-top-competitions-duplicate">
 #topCompetitions{display:none!important}
 #topCompetitions:empty{display:none!important}
 </style>
+
+
 
 
 <style id="championship-average-style">
@@ -114,6 +123,8 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
   }
 }
 </style>
+
+
 
 
 <style id="championship-global-average-style">
@@ -155,6 +166,8 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
   white-space:nowrap;
 }
 </style>
+
+
 
 
 <style id="championship-average-definitive-visible-style">
@@ -199,6 +212,11 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
 
 
 
+
+
+
+
+
 <style id="rating-emojis-final-safe-style">
 .note-btn{
   display:flex!important;
@@ -231,10 +249,13 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
 </style>
 
 
+
+
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="icon" href="./favicon.ico">
 <meta name="theme-color" content="#06110b">
+
 
 </head>
 <body>
@@ -244,6 +265,7 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
   <div class="brand" onclick="go('home')"><img src="data:image/png;base64,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" alt=""><div><div class="brand-title">Le Cahier</div><div class="brand-sub">des Matchs</div></div></div>
   <button class="add-btn" onclick="go('add')">+ Ajouter</button>
 </header>
+
 
 <section id="home" class="screen">
   <div class="card">
@@ -260,10 +282,12 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
   <div id="lastMatch" class="card empty">Aucun match.</div>
 </section>
 
+
 <section id="matches" class="screen hidden">
   <div class="section-title"><h2>Matchs par championnat</h2><button class="secondary" onclick="go('add')">+ Ajouter</button></div>
   <div id="matchList"></div>
 </section>
+
 
 <section id="add" class="screen hidden">
   <div class="card form">
@@ -287,6 +311,7 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
   </div>
 </section>
 
+
 <section id="stats" class="screen hidden">
   <div class="section-title"><h2>Statistiques</h2></div>
   <div class="stats-switch"><button id="seasonBtn" onclick="forceStatsMode('season')" class="active">📅 Saison</button><button id="careerBtn" onclick="forceStatsMode('career')">🏆 Totaux</button></div>
@@ -308,14 +333,17 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
 <div class="card"><h3>🟨 Arbitres</h3><div id="topRefs" class="top-list"></div></div><div class="card" id="careerRecordsCard"><h3>🏅 Records personnels</h3><div id="careerRecords" class="top-list"></div></div>
 </section>
 
+
 <section id="archives" class="screen hidden">
   <div class="card"><h3>Clôturer la saison</h3><p class="muted"><span id="archiveCount">0</span> matchs cette saison.</p><button class="primary" onclick="archiveSeason()">🏆 Archiver la saison</button></div>
   <div id="archivesList"></div>
 </section>
 
+
 <section id="profile" class="screen hidden">
   <div class="card"><h2>Mon espace</h2><p class="muted">Données stockées sur cet appareil.</p><button class="secondary" onclick="exportData()">Exporter</button> <button class="secondary" onclick="importData()">Importer</button><button class="danger" onclick="if(confirm('Réinitialiser ?')){localStorage.removeItem(DB_KEY);location.reload()}">Réinitialiser</button></div>
 </section>
+
 
 <nav class="tabs">
   <button class="tab active" data-go="home"><b>🏠</b>Accueil</button>
@@ -326,18 +354,22 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
 </nav>
 </main>
 
+
 <script>
 const DB_KEY="cahier_matchs_prod_propre_v29";
 const DEMO=[];
-const competitions={"🇫🇷 Ligue 1": ["Angers", "Auxerre", "Brest", "Le Havre", "Lens", "Lille", "Lorient", "Lyon", "Troyes", "Monaco", "Le Mans", "Nice", "OM", "Paris FC", "PSG", "Rennes", "Strasbourg", "Toulouse"], "🇫🇷 Ligue 2": ["Nantes", "Annecy", "Metz", "Boulogne", "Clermont", "Dunkerque", "Grenoble", "Guingamp", "Laval", "Le Mans", "Montpellier", "Nancy", "Pau", "Red Star", "Reims", "Rodez", "Saint-Étienne", "Troyes"], "🇬🇧 Premier League": ["Arsenal", "Aston Villa", "Bournemouth", "Brentford", "Brighton", "Burnley", "Chelsea", "Crystal Palace", "Everton", "Fulham", "Leeds United", "Liverpool", "Manchester City", "Manchester United", "Newcastle", "Nottingham Forest", "Sunderland", "Tottenham", "West Ham", "Wolverhampton"], "🇪🇸 Liga": ["Alavés", "Athletic Bilbao", "Atlético Madrid", "Betis", "Celta Vigo", "Elche", "Espanyol", "FC Barcelone", "Getafe", "Gérone", "Levante", "Majorque", "Osasuna", "Rayo Vallecano", "Real Madrid", "Real Oviedo", "Real Sociedad", "Séville", "Valence", "Villarreal"], "🇮🇹 Serie A": ["Atalanta", "Bologne", "Cagliari", "Como", "Cremonese", "Fiorentina", "Genoa", "Hellas Vérone", "Inter", "Juventus", "Lazio", "Lecce", "Milan", "Naples", "Parma", "Pisa", "Roma", "Sassuolo", "Torino", "Udinese"], "🇩🇪 Bundesliga": ["Augsbourg", "Bayern Munich", "Cologne", "Dortmund", "Eintracht Francfort", "Fribourg", "Hambourg", "Heidenheim", "Hoffenheim", "Leverkusen", "Mayence", "Mönchengladbach", "RB Leipzig", "St. Pauli", "Stuttgart", "Union Berlin", "Werder Brême", "Wolfsburg"], "🇵🇹 Liga Portugal": ["Alverca", "Arouca", "AVS", "Benfica", "Braga", "Casa Pia", "Estoril", "Estrela Amadora", "Famalicão", "Gil Vicente", "Moreirense", "Nacional", "Porto", "Rio Ave", "Santa Clara", "Sporting CP", "Tondela", "Vitória Guimarães"], "🇪🇺 Champions League": ["Arsenal", "Bayern Munich", "Chelsea", "Dortmund", "FC Barcelone", "Inter", "Juventus", "Leverkusen", "Liverpool", "Manchester City", "Monaco", "Naples", "OM", "PSG", "Real Madrid"], "🇪🇺 Europa League": ["Aston Villa", "Betis", "Braga", "Fenerbahçe", "Feyenoord", "Galatasaray", "Lazio", "Lille", "Lyon", "Manchester United", "Milan", "Nice", "Roma", "Tottenham"], "🇪🇺 Conference League": ["Anderlecht", "AZ Alkmaar", "Club Bruges", "Crystal Palace", "Fiorentina", "Lens", "Mayence", "Strasbourg", "Trabzonspor", "Twente", "Villarreal"], "🇫🇷 Coupe de France": ["Angers", "Bastia", "Lens", "Lille", "Lyon", "Monaco", "Nantes", "Nice", "OM", "PSG", "Red Star", "Rennes", "Saint-Étienne", "Strasbourg", "Toulouse"], "🌍 Coupe du Monde": ["Afrique du Sud", "Allemagne", "Angleterre", "Argentine", "Belgique", "Brésil", "Croatie", "Danemark", "Espagne", "États-Unis", "France", "Italie", "Japon", "Maroc", "Mexique", "Pays-Bas", "Portugal", "Sénégal", "Suisse", "Uruguay"], "🇪🇺 Euro": ["Allemagne", "Angleterre", "Autriche", "Belgique", "Croatie", "Danemark", "Écosse", "Espagne", "France", "Italie", "Pays-Bas", "Pologne", "Portugal", "Suisse", "Turquie", "Ukraine"]};
-const referees=["const referees=[const referees=[const referees=["Non renseigné","Marc Bollengier","Jérôme Brisard","Ruddy Buquet","Bastien Dechepy","Willy Delajod","Abdelatif Kherradji","Geoffrey Kubler","François Letexier","Romain Lissorgue","Guillaume Paradis","Aurélien Petit","Jérémie Pignard","Azzedine Souifi","Jérémy Stinat","Clément Turpin","Mathieu Vernice","Eric Wattellier","Hakim Ben El Hadj"];];"];
+const competitions={"🇫🇷 Ligue 1": ["Angers", "Auxerre", "Brest", "Le Havre", "Lens", "Lille", "Lorient", "Lyon", "Metz", "Monaco", "Nantes", "Nice", "OM", "Paris FC", "PSG", "Rennes", "Strasbourg", "Toulouse"], "🇫🇷 Ligue 2": ["Amiens", "Annecy", "Bastia", "Boulogne", "Clermont", "Dunkerque", "Grenoble", "Guingamp", "Laval", "Le Mans", "Montpellier", "Nancy", "Pau", "Red Star", "Reims", "Rodez", "Saint-Étienne", "Troyes"], "🇬🇧 Premier League": ["Arsenal", "Aston Villa", "Bournemouth", "Brentford", "Brighton", "Burnley", "Chelsea", "Crystal Palace", "Everton", "Fulham", "Leeds United", "Liverpool", "Manchester City", "Manchester United", "Newcastle", "Nottingham Forest", "Sunderland", "Tottenham", "West Ham", "Wolverhampton"], "🇪🇸 Liga": ["Alavés", "Athletic Bilbao", "Atlético Madrid", "Betis", "Celta Vigo", "Elche", "Espanyol", "FC Barcelone", "Getafe", "Gérone", "Levante", "Majorque", "Osasuna", "Rayo Vallecano", "Real Madrid", "Real Oviedo", "Real Sociedad", "Séville", "Valence", "Villarreal"], "🇮🇹 Serie A": ["Atalanta", "Bologne", "Cagliari", "Como", "Cremonese", "Fiorentina", "Genoa", "Hellas Vérone", "Inter", "Juventus", "Lazio", "Lecce", "Milan", "Naples", "Parma", "Pisa", "Roma", "Sassuolo", "Torino", "Udinese"], "🇩🇪 Bundesliga": ["Augsbourg", "Bayern Munich", "Cologne", "Dortmund", "Eintracht Francfort", "Fribourg", "Hambourg", "Heidenheim", "Hoffenheim", "Leverkusen", "Mayence", "Mönchengladbach", "RB Leipzig", "St. Pauli", "Stuttgart", "Union Berlin", "Werder Brême", "Wolfsburg"], "🇵🇹 Liga Portugal": ["Alverca", "Arouca", "AVS", "Benfica", "Braga", "Casa Pia", "Estoril", "Estrela Amadora", "Famalicão", "Gil Vicente", "Moreirense", "Nacional", "Porto", "Rio Ave", "Santa Clara", "Sporting CP", "Tondela", "Vitória Guimarães"], "🇪🇺 Champions League": ["Arsenal", "Bayern Munich", "Chelsea", "Dortmund", "FC Barcelone", "Inter", "Juventus", "Leverkusen", "Liverpool", "Manchester City", "Monaco", "Naples", "OM", "PSG", "Real Madrid"], "🇪🇺 Europa League": ["Aston Villa", "Betis", "Braga", "Fenerbahçe", "Feyenoord", "Galatasaray", "Lazio", "Lille", "Lyon", "Manchester United", "Milan", "Nice", "Roma", "Tottenham"], "🇪🇺 Conference League": ["Anderlecht", "AZ Alkmaar", "Club Bruges", "Crystal Palace", "Fiorentina", "Lens", "Mayence", "Strasbourg", "Trabzonspor", "Twente", "Villarreal"], "🇫🇷 Coupe de France": ["Angers", "Bastia", "Lens", "Lille", "Lyon", "Monaco", "Nantes", "Nice", "OM", "PSG", "Red Star", "Rennes", "Saint-Étienne", "Strasbourg", "Toulouse"], "🌍 Coupe du Monde": ["Afrique du Sud", "Allemagne", "Angleterre", "Argentine", "Belgique", "Brésil", "Croatie", "Danemark", "Espagne", "États-Unis", "France", "Italie", "Japon", "Maroc", "Mexique", "Pays-Bas", "Portugal", "Sénégal", "Suisse", "Uruguay"], "🇪🇺 Euro": ["Allemagne", "Angleterre", "Autriche", "Belgique", "Croatie", "Danemark", "Écosse", "Espagne", "France", "Italie", "Pays-Bas", "Pologne", "Portugal", "Suisse", "Turquie", "Ukraine"]};
+const referees=["Non renseigné", "Bastien Dechepy", "Benoît Bastien", "Clément Turpin", "Eric Wattellier", "Florent Batta", "François Letexier", "Hakim Ben El Hadj", "Jérémie Pignard", "Jérôme Brisard", "Mathieu Vernice", "Marc Bollengier", "Mikaël Lesage", "Romain Lissorgue", "Ruddy Buquet", "Stéphanie Frappart", "Thomas Léonard", "Willy Delajod"];
 let data={matches:[],archives:[]};
 let selectedRating=null, selectedRefRating=null, editingMatchId=null, statsMode="season";
+
 
 const matchEmojis={1:"💀",2:"🥶",3:"😑",4:"😕",5:"😐",6:"👍",7:"🔥",8:"🤩",9:"👑",10:"🐐"};
 const matchLabels={1:"Une purge absolue",2:"Glacial, aucun plaisir",3:"Sans intérêt",4:"Décevant",5:"Moyen",6:"Bon match",7:"Très bon match",8:"Super spectacle",9:"Match exceptionnel",10:"Match légendaire"};
 const refEmojis={1:"🚨",2:"🤦",3:"😬",4:"😕",5:"😐",6:"👍",7:"👌",8:"🎯",9:"⭐",10:"👑"};
 const refLabels={1:"Catastrophique",2:"Hors sujet",3:"Très mauvais",4:"Beaucoup d\'erreurs",5:"Moyen",6:"Correct",7:"Bonne prestation",8:"Décisions justes",9:"Excellent arbitrage",10:"Arbitrage parfait"};
+
+
 
 
 function load(){ const raw=localStorage.getItem(DB_KEY); data=raw?JSON.parse(raw):{matches:[...DEMO],archives:[]}; }
@@ -351,6 +383,7 @@ function avg(arr){ const n=arr.filter(x=>Number(x)); return n.length?(n.reduce((
 function sumTickets(items){ return items.reduce((s,m)=>s+(Number(m.ticket)||0),0); }
 function countBy(items,fn){ const o={}; items.forEach(m=>{ const keys=fn(m); (Array.isArray(keys)?keys:[keys]).filter(Boolean).forEach(k=>o[k]=(o[k]||0)+1); }); return Object.entries(o).sort((a,b)=>b[1]-a[1]); }
 
+
 function initForm(){
  const compOrder=["🇫🇷 Ligue 1", "🇫🇷 Ligue 2", "🇬🇧 Premier League", "🇪🇸 Liga", "🇮🇹 Serie A", "🇩🇪 Bundesliga", "🇵🇹 Liga Portugal", "🇪🇺 Champions League", "🇪🇺 Europa League", "🇪🇺 Conference League", "🌍 Coupe du Monde", "🇪🇺 Euro", "🇫🇷 Coupe de France"]; competition.innerHTML=`<option value="">Choisir une compétition</option>`+compOrder.filter(c=>competitions[c]).map(c=>`<option>${c}</option>`).join("")+'<option value="manual">✍️ Saisie manuelle</option>';
  referee.innerHTML=referees.map(r=>`<option>${r}</option>`).join("")+`<option value="manual">✍️ Saisie manuelle</option>`;
@@ -362,9 +395,11 @@ function fillTeams(){
  const comp=competition.value;
  const isManualComp=comp==="manual";
 
+
  if(document.getElementById("manualCompetition")) manualCompetition.classList.toggle("hidden",!isManualComp);
  if(document.getElementById("manualHomeTeam")) manualHomeTeam.classList.add("hidden");
  if(document.getElementById("manualAwayTeam")) manualAwayTeam.classList.add("hidden");
+
 
  if(!comp){
    homeTeam.innerHTML='<option value="">Choisir d’abord une compétition</option>';
@@ -373,6 +408,7 @@ function fillTeams(){
    awayTeam.disabled=true;
    return;
  }
+
 
  if(isManualComp){
    homeTeam.innerHTML='<option value="manual">✍️ Écrire l’équipe domicile</option>';
@@ -384,6 +420,7 @@ function fillTeams(){
    return;
  }
 
+
  const arr=[...(competitions[comp]||[])].sort((a,b)=>a.localeCompare(b,"fr",{sensitivity:"base"}));
  const opts='<option value="">Choisir</option>'+arr.map(t=>`<option>${t}</option>`).join("")+'<option value="manual">✍️ Saisie manuelle</option>';
  homeTeam.innerHTML=opts;
@@ -392,6 +429,7 @@ function fillTeams(){
  awayTeam.disabled=false;
 }
 
+
 function toggleManualTeamInputs(){
  if(document.getElementById("manualHomeTeam")) manualHomeTeam.classList.toggle("hidden",homeTeam.value!=="manual");
  if(document.getElementById("manualAwayTeam")) manualAwayTeam.classList.toggle("hidden",awayTeam.value!=="manual");
@@ -399,6 +437,7 @@ function toggleManualTeamInputs(){
 function setRating(n){ selectedRating=n; [...noteGrid.children].forEach((b,i)=>b.classList.toggle("active",i+1===n)); }
 function setRefRating(n){ selectedRefRating=n; [...refNoteGrid.children].forEach((b,i)=>b.classList.toggle("active",i+1===n)); }
 function toggleStadium(){ stadiumFields.classList.toggle("hidden",watchPlace.value!=="🏟️ Stade"); }
+
 
 function saveMatch(){
  let comp=competition.value; if(comp==="manual") comp=(manualCompetition.value.trim()||"");
@@ -412,6 +451,7 @@ function saveMatch(){
  save(); editingMatchId=null; resetForm(); render(); go("home");
 }
 function resetForm(){ document.querySelectorAll("#add input,#add textarea").forEach(x=>x.value=""); ["manualCompetition","manualHomeTeam","manualAwayTeam"].forEach(id=>{const el=document.getElementById(id); if(el) el.classList.add("hidden");}); matchDate.value=todayISO(); selectedRating=null; selectedRefRating=null; [...noteGrid.children,...refNoteGrid.children].forEach(b=>b.classList.remove("active")); competition.selectedIndex=0; fillTeams(); referee.selectedIndex=0; watchPlace.selectedIndex=0; toggleStadium(); saveMatchButton.textContent="Enregistrer le match"; formTitle.textContent="Ajouter un match"; }
+
 
 function renderMatch(m){
  return `<div class="card match-card" data-match-id="${m.id}">
@@ -443,6 +483,7 @@ function renderMatchesByComp(items){
    groups[comp].push(m);
  });
 
+
  return Object.entries(groups)
    .map(([comp,matches])=>({comp,matches}))
    .sort((a,b)=>b.matches.length-a.matches.length || a.comp.localeCompare(b.comp,"fr",{sensitivity:"base"}))
@@ -460,15 +501,18 @@ function renderMatchesByComp(items){
    }).join("");
 }
 
+
 function toggleMatchComp(idx){
  const el=document.getElementById("matchComp"+idx);
  if(el) el.classList.toggle("hidden");
 }
 
+
 function toggleCompStats(idx){
  const el=document.getElementById("compStats"+idx);
  if(el) el.classList.toggle("hidden");
 }
+
 
 function toggleTeamStats(compIdx, teamIdx){
  const el=document.getElementById(`teamStats${compIdx}_${teamIdx}`);
@@ -476,6 +520,7 @@ function toggleTeamStats(compIdx, teamIdx){
 }
 function renderStats(){ const career=allMatches(); const items=statsMode==="season"?data.matches:career; seasonBtn.classList.toggle("active",statsMode==="season"); careerBtn.classList.toggle("active",statsMode==="career"); sTotalLabel.textContent=statsMode==="season"?"Matchs vus saison":"Matchs vus carrière"; sTicketsLabel.textContent=statsMode==="season"?"Billets saison":"Billets total"; sTotal.textContent=items.length; sTv.textContent=items.filter(m=>m.place==="📺 Télévision").length; sStadium.textContent=items.filter(m=>m.place==="🏟️ Stade").length; sTickets.textContent=sumTickets(items).toFixed(0)+"€"; sAvg.textContent=avg(items.map(m=>m.rating)); sCareer.textContent=career.length; renderMonthly(items); renderTeamAvg(items); topTeams.innerHTML=countBy(items,m=>[m.home,m.away]).slice(0,3).map((x,i)=>`<div class="rank"><div class="rank-left">${i+1}. ${x[0]}</div><b>${x[1]}</b></div>`).join("")||'<p class="muted">Pas encore.</p>'; topCompetitions.innerHTML=countBy(items,m=>m.competition).slice(0,3).map((x,i)=>`<div class="rank"><div class="rank-left">${i+1}. ${x[0]}</div><b>${x[1]}</b></div>`).join("")||'<p class="muted">Pas encore.</p>'; topRefs.innerHTML=Object.entries(items.reduce((o,m)=>{if(m.referee&&m.referee!=="Non renseigné"&&Number(m.refRating)){(o[m.referee]=o[m.referee]||[]).push(Number(m.refRating));} return o},{})).map(([r,a])=>[r,(a.reduce((x,y)=>x+y,0)/a.length).toFixed(1)]).sort((a,b)=>b[1]-a[1]).slice(0,5).map((x,i)=>`<div class="rank"><div>${i+1}. ${x[0]}</div><b>${x[1]}/10</b></div>`).join("")||'<p class="muted">Pas encore.</p>'; }
 function setStatsMode(m){ statsMode=m; render(); }
+
 
 function render(){ const career=allMatches(); seasonCount.textContent=data.matches.length; careerCount.textContent=career.length; tvCount.textContent=career.filter(m=>m.place==="📺 Télévision").length; stadiumCount.textContent=career.filter(m=>m.place==="🏟️ Stade").length; ticketSeason.textContent=sumTickets(data.matches).toFixed(0)+"€"; homeAvg.textContent=avg(career.map(m=>m.rating)); archiveCount.textContent=data.matches.length; lastMatch.innerHTML=data.matches.length?data.matches.slice(0,3).map(renderCompact).join(""):"Aucun match."; matchList.innerHTML=data.matches.length?renderMatchesByComp(data.matches):'<div class="card empty">Aucun match.</div>'; archivesList.innerHTML=data.archives.length?data.archives.map(a=>`<div class="card"><h3>${a.name}</h3><p class="muted">${a.matches.length} matchs</p></div>`).join(""):'<div class="card empty">Aucune archive.</div>'; renderStats(); }
 function go(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("hidden",s.id!==id)); document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.go===id)); window.scrollTo(0,0); }
@@ -488,15 +533,21 @@ load(); initForm(); render();
 
 
 
+
+
+
+
 <script id="definitive-match-actions-fix">
 (function(){
   function q(id){ return document.getElementById(id); }
   function safeToast(msg){ if(typeof toast==="function") toast(msg); else alert(msg); }
 
+
   window.renderMatch = function(m){
     const ratingEmoji = (typeof matchEmojis==="object" ? (matchEmojis[Number(m.rating)] || "⭐") : "⭐");
     const ratingLabel = (typeof matchLabels==="object" && matchLabels[Number(m.rating)]) ? " • " + matchLabels[Number(m.rating)] : "";
     const refEmoji = (typeof refEmojis==="object" && m.refRating) ? (refEmojis[Number(m.refRating)] || "⭐") : "";
+
 
     return `<div class="card match-card" data-match-id="${String(m.id)}">
       <span class="league-pill">${m.competition || ""}</span>
@@ -519,16 +570,20 @@ load(); initForm(); render();
     </div>`;
   };
 
+
   window.editMatch = function(id){
     const matchId = String(id);
     const m = (data.matches || []).find(x => String(x.id) === matchId);
+
 
     if(!m){
       safeToast("Match introuvable.");
       return;
     }
 
+
     editingMatchId = m.id;
+
 
     if(q("matchDate")) matchDate.value = m.dateISO || (typeof frToISO==="function" ? frToISO(m.date) : "");
     if(q("competition")){
@@ -536,10 +591,12 @@ load(); initForm(); render();
       if(typeof fillTeams==="function") fillTeams();
     }
 
+
     if(competition.value === "manual" && q("manualCompetition")){
       manualCompetition.value = m.competition || "";
       manualCompetition.classList.remove("hidden");
     }
+
 
     if(q("homeTeam")){
       homeTeam.value = Array.from(homeTeam.options).some(o => o.value === m.home) ? m.home : "manual";
@@ -548,7 +605,9 @@ load(); initForm(); render();
       awayTeam.value = Array.from(awayTeam.options).some(o => o.value === m.away) ? m.away : "manual";
     }
 
+
     if(typeof toggleManualTeamInputs==="function") toggleManualTeamInputs();
+
 
     if(q("manualHomeTeam") && homeTeam.value === "manual"){
       manualHomeTeam.value = m.home || "";
@@ -559,18 +618,23 @@ load(); initForm(); render();
       manualAwayTeam.classList.remove("hidden");
     }
 
+
     if(q("homeScore")) homeScore.value = m.homeScore || "";
     if(q("awayScore")) awayScore.value = m.awayScore || "";
+
 
     selectedRating = Number(m.rating);
     if(typeof setRating==="function") setRating(selectedRating);
 
+
     if(q("motm")) motm.value = m.motm || "";
     if(q("watchPlayer")) watchPlayer.value = m.watchPlayer || "";
+
 
     if(q("referee")){
       referee.value = Array.from(referee.options).some(o => o.value === m.referee) ? m.referee : "Non renseigné";
     }
+
 
     selectedRefRating = m.refRating ? Number(m.refRating) : null;
     if(selectedRefRating && typeof setRefRating==="function"){
@@ -579,50 +643,63 @@ load(); initForm(); render();
       Array.from(refNoteGrid.children).forEach(b => b.classList.remove("active"));
     }
 
+
     if(q("watchPlace")) watchPlace.value = m.place || "📺 Télévision";
     if(typeof toggleStadium==="function") toggleStadium();
+
 
     if(q("stadiumName")) stadiumName.value = m.stadium || "";
     if(q("ticketPrice")) ticketPrice.value = m.ticket || "";
     if(q("withPeople")) withPeople.value = m.people || "";
     if(q("comment")) comment.value = m.comment || "";
 
+
     if(q("formTitle")) formTitle.textContent = "Modifier le match";
     if(q("saveMatchButton")) saveMatchButton.textContent = "Enregistrer les modifications";
 
+
     if(typeof go==="function") go("add");
   };
+
 
   window.deleteMatch = function(id){
     const matchId = String(id);
     if(!confirm("Supprimer ce match ?")) return;
 
+
     const before = data.matches.length;
     data.matches = data.matches.filter(m => String(m.id) !== matchId);
+
 
     if(data.matches.length === before){
       safeToast("Match introuvable.");
       return;
     }
 
+
     if(typeof save==="function") save();
     if(typeof render==="function") render();
     safeToast("Match supprimé.");
   };
 
+
   document.addEventListener("click", function(e){
     const btn = e.target.closest && e.target.closest("[data-action][data-match-id]");
     if(!btn) return;
 
+
     e.preventDefault();
     e.stopPropagation();
+
 
     const id = btn.getAttribute("data-match-id");
     const action = btn.getAttribute("data-action");
 
+
     if(action === "edit") window.editMatch(id);
     if(action === "delete") window.deleteMatch(id);
   }, true);
+
 
   // Re-render once after overrides so cards receive the new reliable buttons.
   setTimeout(function(){
@@ -638,9 +715,18 @@ load(); initForm(); render();
 
 
 
+
+
+
+
+
+
+
+
 <script id="archive-restore-final-fix">
 (function(){
   function safeToast(msg){ if(typeof toast==="function") toast(msg); else alert(msg); }
+
 
   function normalize(){
     if(!window.data) window.data={matches:[],archives:[]};
@@ -649,8 +735,10 @@ load(); initForm(); render();
     data.archives=data.archives.filter(a=>a && Array.isArray(a.matches));
   }
 
+
   function season(){ normalize(); return data.matches; }
   function career(){ normalize(); return [...data.matches,...data.archives.flatMap(a=>a.matches||[])]; }
+
 
   function avg(arr){
     const nums=arr.map(Number).filter(n=>!isNaN(n)&&n>0);
@@ -682,6 +770,7 @@ load(); initForm(); render();
     }).join("");
   }
 
+
   window.renderMonthly=function(items){
     const months={};
     items.forEach(m=>{
@@ -694,6 +783,7 @@ load(); initForm(); render();
     bars("monthlyMatchChart",rows,"count");
     bars("monthlyRatingChart",rows.map(r=>({label:r.label,avg:r.ratings.length?Number((r.ratings.reduce((a,b)=>a+b,0)/r.ratings.length).toFixed(1)):0})),"avg","/10");
   };
+
 
   window.renderTeamAvg=function(items){
     const el=document.getElementById("teamAverageByCompetition"); if(!el) return;
@@ -724,6 +814,7 @@ load(); initForm(); render();
     }).join("");
   };
 
+
   window.renderStats=function(){
     normalize();
     const s=season(), c=career();
@@ -731,10 +822,12 @@ load(); initForm(); render();
     const items=mode==="career"?c:s;
     const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
 
+
     const seasonBtn=document.getElementById("seasonBtn")||document.getElementById("statsSeasonBtn");
     const careerBtn=document.getElementById("careerBtn")||document.getElementById("statsCareerBtn");
     if(seasonBtn) seasonBtn.classList.toggle("active",mode==="season");
     if(careerBtn) careerBtn.classList.toggle("active",mode==="career");
+
 
     set("sTotalLabel",mode==="season"?"Matchs vus saison":"Matchs vus carrière");
     set("sTicketsLabel",mode==="season"?"Billets saison":"Billets total");
@@ -745,6 +838,7 @@ load(); initForm(); render();
     set("sAvg",avg(items.map(m=>m.rating)));
     set("sCareer",c.length);
 
+
     set("seasonTotalStat",s.length);
     set("seasonTvStat",s.filter(m=>m.place==="📺 Télévision").length);
     set("seasonStadiumStat",s.filter(m=>m.place==="🏟️ Stade").length);
@@ -754,8 +848,10 @@ load(); initForm(); render();
     set("careerStadiumStat",c.filter(m=>m.place==="🏟️ Stade").length);
     set("careerTicketsStat",sumTickets(c).toFixed(0)+"€");
 
+
     renderMonthly(items);
     renderTeamAvg(items);
+
 
     const topTeams=document.getElementById("topTeams");
     if(topTeams) topTeams.innerHTML=countBy(items,m=>[m.home,m.away]).slice(0,10).map((x,i)=>`<div class="rank"><div class="rank-left">${i+1}. ${x[0]}</div><b>${x[1]}</b></div>`).join("") || '<p class="muted">Pas encore de données.</p>';
@@ -774,7 +870,9 @@ load(); initForm(); render();
     }
   };
 
+
   window.setStatsMode=function(mode){ window.statsMode=mode; renderStats(); };
+
 
   window.archiveSeason=function(){
     normalize();
@@ -789,16 +887,19 @@ load(); initForm(); render();
     safeToast("Saison archivée.");
   };
 
+
   window.restoreArchive=function(id){
     normalize();
     const idx=data.archives.findIndex(a=>String(a.id)===String(id));
     if(idx<0){ safeToast("Archive introuvable."); return; }
     const archive=data.archives[idx];
 
+
     if(data.matches.length){
       const ok=confirm("La saison actuelle contient déjà des matchs. Restaurer va fusionner cette archive avec la saison actuelle. Continuer ?");
       if(!ok) return;
     }
+
 
     data.matches=[...archive.matches,...data.matches];
     data.archives.splice(idx,1);
@@ -807,6 +908,7 @@ load(); initForm(); render();
     if(typeof go==="function") go("matches");
     safeToast("Saison désarchivée. Tu peux modifier les matchs.");
   };
+
 
   window.deleteArchive=function(id){
     normalize();
@@ -818,6 +920,7 @@ load(); initForm(); render();
     if(typeof render==="function") render();
     safeToast("Archive supprimée.");
   };
+
 
   window.renderArchives=function(){
     normalize();
@@ -839,9 +942,11 @@ load(); initForm(); render();
     `).join("");
   };
 
+
   const oldRender=window.render;
   window.render=function(){
     if(typeof oldRender==="function") oldRender();
+
 
     // Force archive counter and archive list
     const c=document.getElementById("archiveCount");
@@ -850,9 +955,12 @@ load(); initForm(); render();
     renderStats();
   };
 
+
   setTimeout(()=>{ normalize(); if(typeof render==="function") render(); else {renderArchives(); renderStats();} },100);
 })();
 </script>
+
+
 
 
 <script id="home-season-tv-stadium-fix">
@@ -867,15 +975,19 @@ load(); initForm(); render();
     if(stadiumEl) stadiumEl.textContent=stadium;
   }
 
+
   const previousRender=window.render;
   window.render=function(){
     if(typeof previousRender==="function") previousRender();
     updateHomeSeasonSplit();
   };
 
+
   setTimeout(updateHomeSeasonSplit,100);
 })();
 </script>
+
+
 
 
 <script id="stats-mode-buttons-fix">
@@ -885,16 +997,20 @@ load(); initForm(); render();
     if(typeof renderStats === "function") renderStats();
   }
 
+
   document.addEventListener("click", function(e){
     const btn = e.target.closest("button");
     if(!btn) return;
 
+
     const txt = (btn.textContent || "").toLowerCase();
+
 
     if(txt.includes("saison") && btn.closest("#stats")){
       e.preventDefault();
       setMode("season");
     }
+
 
     if((txt.includes("totaux") || txt.includes("total")) && btn.closest("#stats")){
       e.preventDefault();
@@ -902,10 +1018,12 @@ load(); initForm(); render();
     }
   }, true);
 
+
   const oldSetStatsMode = window.setStatsMode;
   window.setStatsMode = function(mode){
     setMode(mode);
   };
+
 
   setTimeout(function(){
     if(typeof renderStats === "function") renderStats();
@@ -914,31 +1032,39 @@ load(); initForm(); render();
 </script>
 
 
+
+
 <script id="force-stats-mode-final">
 function forceStatsMode(mode){
   window.statsMode = mode;
+
 
   const seasonBtn = document.getElementById("seasonBtn");
   const careerBtn = document.getElementById("careerBtn");
   if(seasonBtn) seasonBtn.classList.toggle("active", mode === "season");
   if(careerBtn) careerBtn.classList.toggle("active", mode === "career");
 
+
   const matches = window.data && Array.isArray(data.matches) ? data.matches : [];
   const archives = window.data && Array.isArray(data.archives) ? data.archives : [];
   const career = [...matches, ...archives.flatMap(a => Array.isArray(a.matches) ? a.matches : [])];
   const items = mode === "career" ? career : matches;
+
 
   const set = (id, value) => {
     const el = document.getElementById(id);
     if(el) el.textContent = value;
   };
 
+
   const avg = arr => {
     const nums = arr.map(Number).filter(n => !isNaN(n) && n > 0);
     return nums.length ? (nums.reduce((a,b)=>a+b,0)/nums.length).toFixed(1) : "—";
   };
 
+
   const sumTickets = arr => arr.reduce((s,m)=>s+(Number(m.ticket)||0),0);
+
 
   set("sTotalLabel", mode === "career" ? "Matchs vus carrière" : "Matchs vus saison");
   set("sTicketsLabel", mode === "career" ? "Billets total" : "Billets saison");
@@ -949,8 +1075,10 @@ function forceStatsMode(mode){
   set("sAvg", avg(items.map(m => m.rating)));
   set("sCareer", career.length);
 
+
   if(typeof renderMonthly === "function") renderMonthly(items);
   if(typeof renderTeamAvg === "function") renderTeamAvg(items);
+
 
   const countBy = (arr, fn) => {
     const out = {};
@@ -961,12 +1089,14 @@ function forceStatsMode(mode){
     return Object.entries(out).sort((a,b) => b[1] - a[1]);
   };
 
+
   const topTeams = document.getElementById("topTeams");
   if(topTeams){
     topTeams.innerHTML = countBy(items, m => [m.home, m.away]).slice(0,10)
       .map((x,i)=>`<div class="rank"><div class="rank-left">${i+1}. ${x[0]}</div><b>${x[1]}</b></div>`)
       .join("") || '<p class="muted">Pas encore de données.</p>';
   }
+
 
   const topRefs = document.getElementById("topRefs");
   if(topRefs){
@@ -986,7 +1116,9 @@ function forceStatsMode(mode){
   }
 }
 
+
 window.setStatsMode = forceStatsMode;
+
 
 document.addEventListener("click", function(e){
   const btn = e.target.closest("button");
@@ -1004,8 +1136,11 @@ document.addEventListener("click", function(e){
   }
 }, true);
 
+
 setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
 </script>
+
+
 
 
 <script id="career-totals-complete-fix">
@@ -1017,18 +1152,22 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     return [...current, ...archives.flatMap(a => Array.isArray(a.matches) ? a.matches : [])];
   }
 
+
   function currentSeason(){
     return window.data && Array.isArray(data.matches) ? data.matches : [];
   }
+
 
   function avg(arr){
     const nums = arr.map(Number).filter(n => !isNaN(n) && n > 0);
     return nums.length ? (nums.reduce((a,b)=>a+b,0)/nums.length).toFixed(1) : "—";
   }
 
+
   function sumTickets(items){
     return items.reduce((s,m)=>s+(Number(m.ticket)||0),0);
   }
+
 
   function countBy(items, fn){
     const out = {};
@@ -1039,10 +1178,12 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     return Object.entries(out).sort((a,b)=>b[1]-a[1] || String(a[0]).localeCompare(String(b[0]),"fr",{sensitivity:"base"}));
   }
 
+
   function setText(id, value){
     const el = document.getElementById(id);
     if(el) el.textContent = value;
   }
+
 
   function renderRecords(items, isCareer){
     const el=document.getElementById("careerRecords");
@@ -1052,11 +1193,13 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       return;
     }
 
+
     const competitions = new Set(items.map(m=>m.competition).filter(Boolean)).size;
     const best = [...items].filter(m=>Number(m.rating)).sort((a,b)=>Number(b.rating)-Number(a.rating))[0];
     const worst = [...items].filter(m=>Number(m.rating)).sort((a,b)=>Number(a.rating)-Number(b.rating))[0];
     const topTeam = countBy(items,m=>[m.home,m.away])[0];
     const topComp = countBy(items,m=>m.competition)[0];
+
 
     el.innerHTML = `
       <div class="rank"><div class="rank-left">🏆 Championnat le plus vu</div><b>${topComp ? `${topComp[0]} (${topComp[1]})` : "—"}</b></div>
@@ -1068,18 +1211,22 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     `;
   }
 
+
   window.forceStatsMode = function(mode){
     window.statsMode = mode;
+
 
     const seasonBtn = document.getElementById("seasonBtn");
     const careerBtn = document.getElementById("careerBtn");
     if(seasonBtn) seasonBtn.classList.toggle("active", mode === "season");
     if(careerBtn) careerBtn.classList.toggle("active", mode === "career");
 
+
     const season = currentSeason();
     const career = allCareer();
     const items = mode === "career" ? career : season;
     const isCareer = mode === "career";
+
 
     setText("sTotalLabel", isCareer ? "Matchs vus carrière" : "Matchs vus saison");
     setText("sTicketsLabel", isCareer ? "Billets carrière" : "Billets saison");
@@ -1090,8 +1237,10 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     setText("sAvg", avg(items.map(m=>m.rating)));
     setText("sCareer", career.length);
 
+
     if(typeof renderMonthly === "function") renderMonthly(items);
     if(typeof renderTeamAvg === "function") renderTeamAvg(items);
+
 
     const topTeams = document.getElementById("topTeams");
     if(topTeams){
@@ -1099,6 +1248,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
         .map((x,i)=>`<div class="rank"><div class="rank-left">${i+1}. ${x[0]}</div><b>${x[1]}</b></div>`)
         .join("") || '<p class="muted">Pas encore de données.</p>';
     }
+
 
     const topRefs = document.getElementById("topRefs");
     if(topRefs){
@@ -1117,10 +1267,13 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
         .join("") || '<p class="muted">Pas encore de données.</p>';
     }
 
+
     renderRecords(items, isCareer);
   };
 
+
   window.setStatsMode = window.forceStatsMode;
+
 
   document.addEventListener("click", function(e){
     const btn = e.target.closest("button");
@@ -1136,10 +1289,12 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     }
   }, true);
 
+
   const oldRenderStats = window.renderStats;
   window.renderStats = function(){
     window.forceStatsMode(window.statsMode || "season");
   };
+
 
   const oldRender = window.render;
   window.render = function(){
@@ -1147,9 +1302,12 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     window.forceStatsMode(window.statsMode || "season");
   };
 
+
   setTimeout(()=>window.forceStatsMode(window.statsMode || "season"),100);
 })();
 </script>
+
+
 
 
 <script id="archive-button-final-fix">
@@ -1159,23 +1317,28 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     else alert(msg);
   }
 
+
   function normalizeArchiveData(){
     if(!window.data) window.data={matches:[],archives:[]};
     if(!Array.isArray(data.matches)) data.matches=[];
     if(!Array.isArray(data.archives)) data.archives=[];
   }
 
+
   window.archiveSeason = function(){
     normalizeArchiveData();
+
 
     if(!data.matches.length){
       safeToast("Aucun match à archiver.");
       return;
     }
 
+
     const defaultName = "Saison " + new Date().getFullYear();
     const name = prompt("Nom de la saison à archiver :", defaultName);
     if(!name) return;
+
 
     data.archives.unshift({
       id: Date.now(),
@@ -1183,7 +1346,9 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       matches: [...data.matches]
     });
 
+
     data.matches = [];
+
 
     if(typeof save==="function") save();
     if(typeof render==="function") render();
@@ -1191,12 +1356,15 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     if(typeof forceStatsMode==="function") forceStatsMode("season");
     if(typeof go==="function") go("archives");
 
+
     safeToast("Saison archivée.");
   };
+
 
   document.addEventListener("click", function(e){
     const btn = e.target.closest("button");
     if(!btn) return;
+
 
     const txt = (btn.textContent || "").toLowerCase();
     if(txt.includes("archiver") && txt.includes("saison")){
@@ -1209,12 +1377,15 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
 </script>
 
 
+
+
 <script id="top-avg-display-patch">
 (function(){
   function avgRating(list){
     const nums = list.map(m=>Number(m.rating)).filter(n=>!isNaN(n) && n>0);
     return nums.length ? (nums.reduce((a,b)=>a+b,0)/nums.length).toFixed(1) : "—";
   }
+
 
   function buildTopCompetitionsWithAvg(items){
     const map = {};
@@ -1227,6 +1398,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       .map(([name,matches])=>({name,count:matches.length,avg:avgRating(matches)}))
       .sort((a,b)=>b.count-a.count || String(a.name).localeCompare(String(b.name),"fr",{sensitivity:"base"}));
   }
+
 
   function buildTopTeamsWithAvg(items){
     const map = {};
@@ -1241,6 +1413,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       .sort((a,b)=>b.count-a.count || String(a.name).localeCompare(String(b.name),"fr",{sensitivity:"base"}));
   }
 
+
   function getItemsForCurrentStatsMode(){
     if(!window.data) return [];
     const season = Array.isArray(data.matches) ? data.matches : [];
@@ -1249,8 +1422,10 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     return window.statsMode === "career" ? career : season;
   }
 
+
   function renderTopAverages(){
     const items = getItemsForCurrentStatsMode();
+
 
     const topCompetitions = document.getElementById("topCompetitions");
     if(topCompetitions){
@@ -1262,6 +1437,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
         </div>
       `).join("") : '<p class="muted">Pas encore de données.</p>';
     }
+
 
     const topTeams = document.getElementById("topTeams");
     if(topTeams){
@@ -1275,11 +1451,13 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     }
   }
 
+
   const oldRenderStats = window.renderStats;
   window.renderStats = function(){
     if(typeof oldRenderStats === "function") oldRenderStats();
     renderTopAverages();
   };
+
 
   const oldForceStatsMode = window.forceStatsMode;
   if(typeof oldForceStatsMode === "function"){
@@ -1289,15 +1467,19 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     };
   }
 
+
   const oldRender = window.render;
   window.render = function(){
     if(typeof oldRender === "function") oldRender();
     renderTopAverages();
   };
 
+
   setTimeout(renderTopAverages,150);
 })();
 </script>
+
+
 
 
 <script id="championship-average-final-patch">
@@ -1307,6 +1489,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     return nums.length ? (nums.reduce((a,b)=>a+b,0) / nums.length).toFixed(1) : "—";
   }
 
+
   function currentItems(){
     if(!window.data) return [];
     const season = Array.isArray(data.matches) ? data.matches : [];
@@ -1315,18 +1498,22 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     return window.statsMode === "career" ? career : season;
   }
 
+
   function renderChampionshipAverages(){
     const el = document.getElementById("topCompetitions");
     if(!el) return;
 
+
     const items = currentItems();
     const grouped = {};
+
 
     items.forEach(m => {
       const comp = m.competition || "Autre";
       if(!grouped[comp]) grouped[comp] = [];
       grouped[comp].push(m);
     });
+
 
     const rows = Object.entries(grouped)
       .map(([name, matches]) => ({
@@ -1337,6 +1524,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       .sort((a,b) => b.count - a.count || String(a.name).localeCompare(String(b.name), "fr", {sensitivity:"base"}))
       .slice(0,10);
 
+
     el.innerHTML = rows.length ? rows.map((x,i) => `
       <div class="rank championship-average-row">
         <div class="rank-left">${i+1}. ${x.name}</div>
@@ -1345,11 +1533,13 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     `).join("") : '<p class="muted">Pas encore de données.</p>';
   }
 
+
   const oldRenderStats = window.renderStats;
   window.renderStats = function(){
     if(typeof oldRenderStats === "function") oldRenderStats();
     renderChampionshipAverages();
   };
+
 
   const oldForceStatsMode = window.forceStatsMode;
   if(typeof oldForceStatsMode === "function"){
@@ -1359,15 +1549,19 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     };
   }
 
+
   const oldRender = window.render;
   window.render = function(){
     if(typeof oldRender === "function") oldRender();
     renderChampionshipAverages();
   };
 
+
   setTimeout(renderChampionshipAverages, 200);
 })();
 </script>
+
+
 
 
 <script id="championship-global-average-with-teams-final">
@@ -1377,6 +1571,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     return nums.length ? (nums.reduce((a,b)=>a+b,0) / nums.length).toFixed(1) : "—";
   }
 
+
   function getItems(){
     if(!window.data) return [];
     const season = Array.isArray(data.matches) ? data.matches : [];
@@ -1385,23 +1580,28 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     return window.statsMode === "career" ? career : season;
   }
 
+
   function renderChampionshipsWithGlobalAverage(){
     const el = document.getElementById("topCompetitions");
     if(!el) return;
 
+
     const items = getItems();
     const comps = {};
+
 
     items.forEach(m => {
       const comp = m.competition || "Autre";
       if(!comps[comp]) comps[comp] = {matches: [], teams: {}};
       comps[comp].matches.push(m);
 
+
       [m.home, m.away].filter(Boolean).forEach(team => {
         if(!comps[comp].teams[team]) comps[comp].teams[team] = [];
         comps[comp].teams[team].push(m);
       });
     });
+
 
     const rows = Object.entries(comps)
       .map(([name,obj]) => ({
@@ -1413,10 +1613,12 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       .sort((a,b) => b.count - a.count || String(a.name).localeCompare(String(b.name), "fr", {sensitivity:"base"}))
       .slice(0,10);
 
+
     if(!rows.length){
       el.innerHTML = '<p class="muted">Pas encore de données.</p>';
       return;
     }
+
 
     el.innerHTML = rows.map((comp, idx) => {
       const teams = Object.entries(comp.teams)
@@ -1426,6 +1628,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
           avg: avgRating(matches)
         }))
         .sort((a,b) => b.count - a.count || Number(b.avg) - Number(a.avg) || String(a.team).localeCompare(String(b.team), "fr", {sensitivity:"base"}));
+
 
       return `
         <div class="championship-block-final">
@@ -1448,11 +1651,13 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     }).join("");
   }
 
+
   const oldRenderStats = window.renderStats;
   window.renderStats = function(){
     if(typeof oldRenderStats === "function") oldRenderStats();
     renderChampionshipsWithGlobalAverage();
   };
+
 
   const oldForceStatsMode = window.forceStatsMode;
   if(typeof oldForceStatsMode === "function"){
@@ -1462,15 +1667,19 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     };
   }
 
+
   const oldRender = window.render;
   window.render = function(){
     if(typeof oldRender === "function") oldRender();
     renderChampionshipsWithGlobalAverage();
   };
 
+
   setTimeout(renderChampionshipsWithGlobalAverage, 200);
 })();
 </script>
+
+
 
 
 <script id="championship-average-definitive-visible">
@@ -1480,6 +1689,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     return nums.length ? (nums.reduce((a,b)=>a+b,0) / nums.length).toFixed(1) : "—";
   }
 
+
   function getStatsItems(){
     if(!window.data) return [];
     const season = Array.isArray(data.matches) ? data.matches : [];
@@ -1488,10 +1698,12 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     return window.statsMode === "career" ? career : season;
   }
 
+
   function renderVisibleChampionshipSection(){
     const mainContainer = document.getElementById("teamAverageByCompetition");
     const topContainer = document.getElementById("topCompetitions");
     const items = getStatsItems();
+
 
     const comps = {};
     items.forEach(m => {
@@ -1499,11 +1711,13 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       if(!comps[comp]) comps[comp] = {matches: [], teams: {}};
       comps[comp].matches.push(m);
 
+
       [m.home, m.away].filter(Boolean).forEach(team => {
         if(!comps[comp].teams[team]) comps[comp].teams[team] = [];
         comps[comp].teams[team].push(m);
       });
     });
+
 
     const rows = Object.entries(comps)
       .map(([name,obj]) => ({
@@ -1514,6 +1728,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       }))
       .sort((a,b) => b.count - a.count || String(a.name).localeCompare(String(b.name), "fr", {sensitivity:"base"}));
 
+
     const htmlRows = rows.length ? rows.map((comp, idx) => {
       const teams = Object.entries(comp.teams)
         .map(([team, matches]) => ({
@@ -1522,6 +1737,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
           avg: avgRating(matches)
         }))
         .sort((a,b) => b.count - a.count || Number(b.avg) - Number(a.avg) || String(a.team).localeCompare(String(b.team), "fr", {sensitivity:"base"}));
+
 
       return `
         <div class="championship-avg-visible-block">
@@ -1541,8 +1757,10 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       `;
     }).join("") : '<p class="muted">Pas encore de données.</p>';
 
+
     // This is the section visible on the screenshot with teams inside championships.
     if(mainContainer) mainContainer.innerHTML = htmlRows;
+
 
     // If the old "top competitions" section still exists, keep it consistent too.
     if(topContainer) topContainer.innerHTML = rows.slice(0,10).map((comp, idx) => `
@@ -1553,11 +1771,13 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     `).join("") || '<p class="muted">Pas encore de données.</p>';
   }
 
+
   const oldRenderStats = window.renderStats;
   window.renderStats = function(){
     if(typeof oldRenderStats === "function") oldRenderStats();
     renderVisibleChampionshipSection();
   };
+
 
   const oldForceStatsMode = window.forceStatsMode;
   if(typeof oldForceStatsMode === "function"){
@@ -1567,15 +1787,19 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     };
   }
 
+
   const oldRender = window.render;
   window.render = function(){
     if(typeof oldRender === "function") oldRender();
     renderVisibleChampionshipSection();
   };
 
+
   setTimeout(renderVisibleChampionshipSection, 250);
 })();
 </script>
+
+
 
 
 <script id="final-teams-list-patch">
@@ -1596,10 +1820,12 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     "🇫🇷 Coupe de France": ["Angers","Auxerre","Bastia","Brest","Le Havre","Le Mans","Lens","Lille","Lorient","Lyon","Monaco","Nantes","Nice","OM","PSG","Rennes","Saint-Étienne","Strasbourg","Toulouse","Troyes"]
   };
 
+
   if(typeof competitions === "object"){
     Object.keys(competitions).forEach(k => delete competitions[k]);
     Object.assign(competitions, updatedCompetitions);
   }
+
 
   window.finalCompetitionOrder = [
     "🇫🇷 Ligue 1",
@@ -1617,9 +1843,11 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     "🇫🇷 Coupe de France"
   ];
 
+
   const oldInitForm = window.initForm;
   window.initForm = function(){
     if(typeof oldInitForm === "function") oldInitForm();
+
 
     const competition = document.getElementById("competition");
     if(competition){
@@ -1628,14 +1856,21 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
         `<option value="manual">✍️ Saisie manuelle</option>`;
     }
 
+
     if(typeof fillTeams === "function") fillTeams();
   };
+
 
   setTimeout(() => {
     if(typeof initForm === "function") initForm();
   }, 100);
 })();
 </script>
+
+
+
+
+
 
 
 
@@ -1648,6 +1883,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
   const REF_EMOJIS={1:"🚨",2:"🤦",3:"😬",4:"😕",5:"😐",6:"👍",7:"👌",8:"🎯",9:"⭐",10:"👑"};
   const REF_LABELS={1:"Catastrophique",2:"Hors sujet",3:"Très mauvais",4:"Beaucoup d'erreurs",5:"Moyen",6:"Correct",7:"Bonne prestation",8:"Décisions justes",9:"Excellent arbitrage",10:"Arbitrage parfait"};
 
+
   function ensureDisplays(){
     const noteGrid=document.getElementById("noteGrid");
     const refNoteGrid=document.getElementById("refNoteGrid");
@@ -1659,6 +1895,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     }
   }
 
+
   function showMatch(n){
     ensureDisplays();
     const el=document.getElementById("matchRatingDisplay");
@@ -1666,6 +1903,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     el.classList.remove("hidden");
     el.innerHTML=`<span>${MATCH_EMOJIS[n]}</span><strong>${n}/10</strong><em>${MATCH_LABELS[n]}</em>`;
   }
+
 
   function showRef(n){
     ensureDisplays();
@@ -1675,10 +1913,12 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     el.innerHTML=`<span>${REF_EMOJIS[n]}</span><strong>${n}/10</strong><em>${REF_LABELS[n]}</em>`;
   }
 
+
   function rebuildButtons(){
     ensureDisplays();
     const noteGrid=document.getElementById("noteGrid");
     const refNoteGrid=document.getElementById("refNoteGrid");
+
 
     if(noteGrid){
       noteGrid.innerHTML=[1,2,3,4,5,6,7,8,9,10].map(n=>`
@@ -1694,9 +1934,11 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     }
   }
 
+
   // Keep original saveMatch working by calling original setRating/setRefRating if they exist.
   const originalSetRating=window.setRating;
   const originalSetRefRating=window.setRefRating;
+
 
   document.addEventListener("click",function(e){
     const matchBtn=e.target.closest("[data-match-note]");
@@ -1710,6 +1952,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       return;
     }
 
+
     const refBtn=e.target.closest("[data-ref-note]");
     if(refBtn){
       e.preventDefault();
@@ -1721,6 +1964,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     }
   },true);
 
+
   const oldInitForm=window.initForm;
   if(typeof oldInitForm==="function"){
     window.initForm=function(){
@@ -1728,6 +1972,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       rebuildButtons();
     };
   }
+
 
   const oldResetForm=window.resetForm;
   if(typeof oldResetForm==="function"){
@@ -1740,6 +1985,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       if(r){r.classList.add("hidden");r.innerHTML="";}
     };
   }
+
 
   // Display correct emojis/comments in saved match cards if needed.
   const oldRenderMatch=window.renderMatch;
@@ -1754,12 +2000,15 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     };
   }
 
+
   setTimeout(function(){
     rebuildButtons();
     if(typeof render==="function") render();
   },150);
 })();
 </script>
+
+
 
 
 <script id="motm-watch-stats-patch">
@@ -1771,6 +2020,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     const career = [...season, ...archives.flatMap(a => Array.isArray(a.matches) ? a.matches : [])];
     return window.statsMode === "career" ? career : season;
   }
+
 
   function countNames(items, field){
     const counts = {};
@@ -1786,6 +2036,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
       .slice(0,10);
   }
 
+
   function renderPlayerStatList(id, rows, emptyText){
     const el = document.getElementById(id);
     if(!el) return;
@@ -1797,17 +2048,20 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     `).join("") : `<p class="muted">${emptyText}</p>`;
   }
 
+
   function renderPlayerSeasonStats(){
     const items = getStatsItems();
     renderPlayerStatList("topMotmPlayers", countNames(items, "motm"), "Aucun homme du match renseigné.");
     renderPlayerStatList("topWatchPlayers", countNames(items, "watchPlayer"), "Aucun joueur à suivre renseigné.");
   }
 
+
   const oldRenderStats = window.renderStats;
   window.renderStats = function(){
     if(typeof oldRenderStats === "function") oldRenderStats();
     renderPlayerSeasonStats();
   };
+
 
   const oldForceStatsMode = window.forceStatsMode;
   if(typeof oldForceStatsMode === "function"){
@@ -1817,15 +2071,19 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
     };
   }
 
+
   const oldRender = window.render;
   window.render = function(){
     if(typeof oldRender === "function") oldRender();
     renderPlayerSeasonStats();
   };
 
+
   setTimeout(renderPlayerSeasonStats, 200);
 })();
 </script>
+
+
 
 
 <script id="production-clean-start">
@@ -1842,6 +2100,7 @@ setTimeout(() => forceStatsMode(window.statsMode || "season"), 100);
   }catch(e){}
 })();
 </script>
+
 
 </body>
 </html>
