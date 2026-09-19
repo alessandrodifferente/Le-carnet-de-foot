@@ -329,8 +329,46 @@ select:disabled{opacity:.55;color:#6f8376}.manual-field{margin-top:10px}
 <script>
 const DB_KEY="cahier_matchs_prod_propre_v29";
 const DEMO=[];
-const competitions={"🇫🇷 Ligue 1": ["Angers", "Auxerre", "Brest", "Le Havre", "Lens", "Lille", "Lorient", "Lyon", "Metz", "Monaco", "Nantes", "Nice", "OM", "Paris FC", "PSG", "Rennes", "Strasbourg", "Toulouse"], "🇫🇷 Ligue 2": ["Amiens", "Annecy", "Bastia", "Boulogne", "Clermont", "Dunkerque", "Grenoble", "Guingamp", "Laval", "Le Mans", "Montpellier", "Nancy", "Pau", "Red Star", "Reims", "Rodez", "Saint-Étienne", "Troyes"], "🇬🇧 Premier League": ["Arsenal", "Aston Villa", "Bournemouth", "Brentford", "Brighton", "Burnley", "Chelsea", "Crystal Palace", "Everton", "Fulham", "Leeds United", "Liverpool", "Manchester City", "Manchester United", "Newcastle", "Nottingham Forest", "Sunderland", "Tottenham", "West Ham", "Wolverhampton"], "🇪🇸 Liga": ["Alavés", "Athletic Bilbao", "Atlético Madrid", "Betis", "Celta Vigo", "Elche", "Espanyol", "FC Barcelone", "Getafe", "Gérone", "Levante", "Majorque", "Osasuna", "Rayo Vallecano", "Real Madrid", "Real Oviedo", "Real Sociedad", "Séville", "Valence", "Villarreal"], "🇮🇹 Serie A": ["Atalanta", "Bologne", "Cagliari", "Como", "Cremonese", "Fiorentina", "Genoa", "Hellas Vérone", "Inter", "Juventus", "Lazio", "Lecce", "Milan", "Naples", "Parma", "Pisa", "Roma", "Sassuolo", "Torino", "Udinese"], "🇩🇪 Bundesliga": ["Augsbourg", "Bayern Munich", "Cologne", "Dortmund", "Eintracht Francfort", "Fribourg", "Hambourg", "Heidenheim", "Hoffenheim", "Leverkusen", "Mayence", "Mönchengladbach", "RB Leipzig", "St. Pauli", "Stuttgart", "Union Berlin", "Werder Brême", "Wolfsburg"], "🇵🇹 Liga Portugal": ["Alverca", "Arouca", "AVS", "Benfica", "Braga", "Casa Pia", "Estoril", "Estrela Amadora", "Famalicão", "Gil Vicente", "Moreirense", "Nacional", "Porto", "Rio Ave", "Santa Clara", "Sporting CP", "Tondela", "Vitória Guimarães"], "🇪🇺 Champions League": ["Arsenal", "Bayern Munich", "Chelsea", "Dortmund", "FC Barcelone", "Inter", "Juventus", "Leverkusen", "Liverpool", "Manchester City", "Monaco", "Naples", "OM", "PSG", "Real Madrid"], "🇪🇺 Europa League": ["Aston Villa", "Betis", "Braga", "Fenerbahçe", "Feyenoord", "Galatasaray", "Lazio", "Lille", "Lyon", "Manchester United", "Milan", "Nice", "Roma", "Tottenham"], "🇪🇺 Conference League": ["Anderlecht", "AZ Alkmaar", "Club Bruges", "Crystal Palace", "Fiorentina", "Lens", "Mayence", "Strasbourg", "Trabzonspor", "Twente", "Villarreal"], "🇫🇷 Coupe de France": ["Angers", "Bastia", "Lens", "Lille", "Lyon", "Monaco", "Nantes", "Nice", "OM", "PSG", "Red Star", "Rennes", "Saint-Étienne", "Strasbourg", "Toulouse"], "🌍 Coupe du Monde": ["Afrique du Sud", "Allemagne", "Angleterre", "Argentine", "Belgique", "Brésil", "Croatie", "Danemark", "Espagne", "États-Unis", "France", "Italie", "Japon", "Maroc", "Mexique", "Pays-Bas", "Portugal", "Sénégal", "Suisse", "Uruguay"], "🇪🇺 Euro": ["Allemagne", "Angleterre", "Autriche", "Belgique", "Croatie", "Danemark", "Écosse", "Espagne", "France", "Italie", "Pays-Bas", "Pologne", "Portugal", "Suisse", "Turquie", "Ukraine"]};
-const referees=["Non renseigné", "Bastien Dechepy", "Benoît Bastien", "Clément Turpin", "Eric Wattellier", "Florent Batta", "François Letexier", "Hakim Ben El Hadj", "Jérémie Pignard", "Jérôme Brisard", "Mathieu Vernice", "Marc Bollengier", "Mikaël Lesage", "Romain Lissorgue", "Ruddy Buquet", "Stéphanie Frappart", "Thomas Léonard", "Willy Delajod"];
+const competitions={"🇫🇷 Ligue 1": ["Angers", "Auxerre", "Brest", "Le Havre", "Lens", "Lille", "Lorient", "Lyon", "Troyes", "Monaco", "Le Mans", "Nice", "OM", "Paris FC", "PSG", "Rennes", "Strasbourg", "Toulouse"], "🇫🇷 Ligue 2": ["Nantes", "Annecy", "Metz", "Boulogne", "Clermont", "Dunkerque", "Grenoble", "Guingamp", "Laval", "Le Mans", "Montpellier", "Nancy", "Pau", "Red Star", "Reims", "Rodez", "Saint-Étienne", "Troyes"], "🇬🇧 Premier League": ["Arsenal", "Aston Villa", "Bournemouth", "Brentford", "Brighton", "Burnley", "Chelsea", "Crystal Palace", "Everton", "Fulham", "Leeds United", "Liverpool", "Manchester City", "Manchester United", "Newcastle", "Nottingham Forest", "Sunderland", "Tottenham", "West Ham", "Wolverhampton"], "🇪🇸 Liga": ["Alavés", "Athletic Bilbao", "Atlético Madrid", "Betis", "Celta Vigo", "Elche", "Espanyol", "FC Barcelone", "Getafe", "Gérone", "Levante", "Majorque", "Osasuna", "Rayo Vallecano", "Real Madrid", "Real Oviedo", "Real Sociedad", "Séville", "Valence", "Villarreal"], "🇮🇹 Serie A": ["Atalanta", "Bologne", "Cagliari", "Como", "Cremonese", "Fiorentina", "Genoa", "Hellas Vérone", "Inter", "Juventus", "Lazio", "Lecce", "Milan", "Naples", "Parma", "Pisa", "Roma", "Sassuolo", "Torino", "Udinese"], "🇩🇪 Bundesliga": ["Augsbourg", "Bayern Munich", "Cologne", "Dortmund", "Eintracht Francfort", "Fribourg", "Hambourg", "Heidenheim", "Hoffenheim", "Leverkusen", "Mayence", "Mönchengladbach", "RB Leipzig", "St. Pauli", "Stuttgart", "Union Berlin", "Werder Brême", "Wolfsburg"], "🇵🇹 Liga Portugal": ["Alverca", "Arouca", "AVS", "Benfica", "Braga", "Casa Pia", "Estoril", "Estrela Amadora", "Famalicão", "Gil Vicente", "Moreirense", "Nacional", "Porto", "Rio Ave", "Santa Clara", "Sporting CP", "Tondela", "Vitória Guimarães"], "🇪🇺 Champions League": ["Arsenal", "Bayern Munich", "Chelsea", "Dortmund", "FC Barcelone", "Inter", "Juventus", "Leverkusen", "Liverpool", "Manchester City", "Monaco", "Naples", "OM", "PSG", "Real Madrid"], "🇪🇺 Europa League": ["Aston Villa", "Betis", "Braga", "Fenerbahçe", "Feyenoord", "Galatasaray", "Lazio", "Lille", "Lyon", "Manchester United", "Milan", "Nice", "Roma", "Tottenham"], "🇪🇺 Conference League": ["Anderlecht", "AZ Alkmaar", "Club Bruges", "Crystal Palace", "Fiorentina", "Lens", "Mayence", "Strasbourg", "Trabzonspor", "Twente", "Villarreal"], "🇫🇷 Coupe de France": ["Angers", "Bastia", "Lens", "Lille", "Lyon", "Monaco", "Nantes", "Nice", "OM", "PSG", "Red Star", "Rennes", "Saint-Étienne", "Strasbourg", "Toulouse"], "🌍 Coupe du Monde": ["Afrique du Sud", "Allemagne", "Angleterre", "Argentine", "Belgique", "Brésil", "Croatie", "Danemark", "Espagne", "États-Unis", "France", "Italie", "Japon", "Maroc", "Mexique", "Pays-Bas", "Portugal", "Sénégal", "Suisse", "Uruguay"], "🇪🇺 Euro": ["Allemagne", "Angleterre", "Autriche", "Belgique", "Croatie", "Danemark", "Écosse", "Espagne", "France", "Italie", "Pays-Bas", "Pologne", "Portugal", "Suisse", "Turquie", "Ukraine"]};
+const referees=["const referees=[const referees=[
+"Non renseigné",
+"Marc Bollengier",
+"Jérôme Brisard",
+"Ruddy Buquet",
+"Bastien Dechepy",
+"Willy Delajod",
+"Abdelatif Kherradji",
+"Geoffrey Kubler",
+"François Letexier",
+"Romain Lissorgue",
+"Guillaume Paradis",
+"Aurélien Petit",
+"Jérémie Pignard",
+"Azzedine Souifi",
+"Jérémy Stinat",
+"Clément Turpin",
+"Mathieu Vernice",
+"Eric Wattellier"
+];
+"Non renseigné",
+"Marc Bollengier",
+"Jérôme Brisard",
+"Ruddy Buquet",
+"Bastien Dechepy",
+"Willy Delajod",
+"Abdelatif Kherradji",
+"Geoffrey Kubler",
+"François Letexier",
+"Romain Lissorgue",
+"Guillaume Paradis",
+"Aurélien Petit",
+"Jérémie Pignard",
+"Azzedine Souifi",
+"Jérémy Stinat",
+"Clément Turpin",
+"Mathieu Vernice",
+"Eric Wattellier"
+];"];
 let data={matches:[],archives:[]};
 let selectedRating=null, selectedRefRating=null, editingMatchId=null, statsMode="season";
 
